@@ -82,6 +82,23 @@ WIX_URL_IN_TEXT = re.compile(
     re.IGNORECASE,
 )
 
+MEDIA_BASE = "https://static.wixstatic.com/media/"
+
+# The media ID is the first path segment after /media/ and always carries the
+# file extension. Everything after it is a render-time transform.
+WIX_MEDIA_ID = re.compile(
+    r"/media/([A-Za-z0-9_~.\-]+\.(?:jpg|jpeg|png|webp|gif|avif))",
+    re.IGNORECASE,
+)
+
+# Path fragments that only ever appear inside a Wix render transform. A saved
+# page resolves these against the site's own domain, producing plausible-looking
+# but entirely fictional URLs such as /quality_auto/photo.jpg.
+TRANSFORM_TOKENS = re.compile(
+    r"/(?:quality_auto|enc_avif|enc_webp|fill|fit|crop|usm_[\d.]+|[whxy]_\d+|q_\d+|al_[a-z]+)(?:/|$)",
+    re.IGNORECASE,
+)
+
 
 # --------------------------------------------------------------------------
 # Data model
@@ -278,10 +295,7 @@ class WixPageParser(HTMLParser):
                 self.images.append(src)
             srcset = self._attr(attrs, "srcset")
             if srcset:
-                for candidate in srcset.split(","):
-                    url = candidate.strip().split(" ")[0]
-                    if url:
-                        self.images.append(url)
+                self.images.extend(parse_srcset(srcset))
             return
 
         if tag == "a":
@@ -357,21 +371,68 @@ def clean_title(raw: str) -> str:
     return title
 
 
-def normalise_media(url: str, base: str = "") -> str:
-    """Rewrite a Wix media URL to the full-resolution original."""
-    if url.startswith("//"):
-        url = "https:" + url
-    elif base and not url.startswith(("http://", "https://", "data:")):
-        url = urljoin(base, url)
+def parse_srcset(value: str) -> list[str]:
+    """Pull the URLs out of a srcset attribute.
 
-    if url.startswith("data:"):
+    Splitting on "," is wrong for Wix: its URLs embed commas in the transform
+    segment (".../fill/w_306,h_220,al_c,q_80/file.jpg"), so a naive split
+    invents fragments like "h_220" and "q_80" and treats them as image URLs.
+    A srcset descriptor is always whitespace then a width/density, so match
+    candidates instead of splitting.
+    """
+    urls: list[str] = []
+
+    for part in re.split(r",(?=\s*(?:https?:)?//|\s*[\w./-]+\.(?:jpg|jpeg|png|webp|gif|avif))", value):
+        candidate = part.strip().split()  # drop the "2x" / "612w" descriptor
+        if candidate:
+            urls.append(candidate[0])
+
+    return urls
+
+
+def normalise_media(url: str, base: str = "") -> str:
+    """Rewrite a Wix media URL to the full-resolution original.
+
+    Returns "" for anything that isn't a usable remote image.
+    """
+    url = (url or "").strip()
+
+    if not url or url.startswith(("data:", "#", "javascript:")):
         return ""
 
-    host = urlparse(url).netloc
-    if not any(h in host for h in WIX_MEDIA_HOSTS):
-        return url
+    if url.startswith("//"):
+        url = "https:" + url
+    elif base and not url.startswith(("http://", "https://")):
+        url = urljoin(base, url)
 
-    return WIX_TRANSFORM.sub("", url)
+    if not url.startswith(("http://", "https://")):
+        return ""
+
+    parsed = urlparse(url)
+    host = parsed.netloc
+
+    if any(h in host for h in WIX_MEDIA_HOSTS):
+        # Rebuild from the media ID rather than trimming the tail. Wix filenames
+        # can contain characters that break naive URL matching — "IMG_7889(1).jpg"
+        # is a real one on this site — and every transform segment follows the
+        # ID, so taking the ID and discarding the rest is exact.
+        # "%7E" is an escaped "~"; normalising it stops one asset counting twice.
+        match = WIX_MEDIA_ID.search(url.replace("%7E", "~"))
+        if match:
+            return MEDIA_BASE + match.group(1)
+        return ""
+
+    # A "Save page as" dump rewrites every image to a local *_files/ copy and
+    # to fragments of the transform string. Both resolve against the canonical
+    # base into same-origin URLs that were never real. The CDN originals are
+    # collected separately from the raw HTML, so drop these.
+    if "_files/" in parsed.path or TRANSFORM_TOKENS.search(parsed.path):
+        return ""
+
+    if not re.search(r"\.(jpg|jpeg|png|webp|gif|avif|svg)$", parsed.path, re.IGNORECASE):
+        return ""
+
+    return url
 
 
 # --------------------------------------------------------------------------

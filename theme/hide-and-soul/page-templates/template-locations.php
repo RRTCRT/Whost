@@ -92,6 +92,9 @@ while ( have_posts() ) :
 
 			<div style="max-width:24rem;margin:3rem auto 0;">
 				<h2 style="text-align:center;"><?php esc_html_e( 'Shop hours', 'hide-and-soul' ); ?></h2>
+				<p style="text-align:center;font-size:0.9rem;color:var(--hs-muted);margin-top:-0.5rem;">
+					<?php esc_html_e( 'The same at both shops.', 'hide-and-soul' ); ?>
+				</p>
 				<?php hs_hours_list(); ?>
 				<p style="text-align:center;font-size:0.9rem;color:var(--hs-muted);margin-top:1rem;">
 					<?php echo esc_html( hs_info( 'hours_note' ) ); ?>

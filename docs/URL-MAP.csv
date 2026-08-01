@@ -12,8 +12,10 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /customorders,/custom-orders/,mu-plugin,Wix duplicate slug
 /customladiesvests,/custom-orders/,mu-plugin,Wix duplicate — consider a #ladies anchor instead
 /customlegging,/custom-orders/,mu-plugin,Chaps & half-chap custom orders
-/bh-guide,/black-hills-guide/,mu-plugin,VERIFY — rename target if you prefer /bh-guide/
-/crp,/referrals/,mu-plugin,VERIFY — customer referral program
+/bh-guide,/black-hills-guide/,mu-plugin,Confirmed — nav label is "BLACK HILLS GUIDE"
+/crp,/referrals/,mu-plugin,Confirmed — nav label is "CUSTOMER REFERRAL PROG."
+/testimonials,/testimonials/,slug reuse,Found in the homepage nav
+/videos,/videos/,slug reuse,Found in the homepage nav — Wix Video app; re-embed YouTube directly
 /product-page/<slug>,/product-page/<slug>,woo permalink base,No redirect needed; base set in inc/woocommerce.php
 /product-page/<slug>-1,/product-page/<slug>,mu-plugin,Numeric-suffix fallback for duplicate Wix products
 /account/my-account,/my-account/,mu-plugin,Only relevant if checkout is enabled

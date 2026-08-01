@@ -18,7 +18,8 @@ defined( 'ABSPATH' ) || exit;
 function hs_info_defaults() {
 	return array(
 		'legal_name'   => 'Hide and Soul Leatherworks',
-		'tagline'      => 'Handcrafted leather since 1984',
+		// The homepage says "est. 1983" — not 1984, as directory listings claim.
+		'tagline'      => 'Handcrafted leather since 1983',
 		'phone'        => '(605) 578-9746',
 		// Confirmed from the Wix site's contact settings.
 		'email'        => 'roadkillleather@gmail.com',
@@ -29,7 +30,7 @@ function hs_info_defaults() {
 		'country'      => 'US',
 		'latitude'     => '44.2861',
 		'longitude'    => '-103.7691',
-		'hours_note'   => 'Black Hills shop open April through November.',
+		'hours_note'   => 'Closed Mondays unless you arrange a time with us in advance — give us a call and we will open up.',
 		'season_note'  => 'Winters in Cave Creek, AZ — call ahead for December through March.',
 		'facebook'     => 'https://www.facebook.com/hideandsoulleather/',
 		'instagram'    => '',
@@ -66,16 +67,31 @@ function hs_phone_href() {
 }
 
 /**
- * Weekly opening hours.
+ * Weekly opening hours. Confirmed by the owner; identical at both shops.
  *
  * Keys are schema.org day names so the same array feeds both the visible
  * hours table and the LocalBusiness JSON-LD.
  *
- * @return array<string, array{label: string, opens: string, closes: string}|null>
+ * A value may be:
+ *   array  — an open window, e.g. array( 'opens' => '09:00', 'closes' => '17:00' )
+ *   string — a custom label for a day that isn't a normal open window
+ *   null   — closed
+ *
+ * NOTE: these are the hours the owner gave directly. The old Wix homepage
+ * advertised something different — "Wednesday - Saturday: 10 am - 5 pm,
+ * Sunday 10 am - 4 pm, Closed Monday" — so the Wix site was either stale or
+ * these are new. Worth settling before launch; whichever is wrong is turning
+ * people away at the door.
+ *
+ * Only array values reach the structured data. Monday is deliberately a label
+ * rather than a window: "by appointment" is not an opening time, and telling
+ * Google the shop is open would send people to a locked door.
+ *
+ * @return array<string, array{opens: string, closes: string}|string|null>
  */
 function hs_hours() {
 	$default = array(
-		'Monday'    => null,
+		'Monday'    => 'By appointment',
 		'Tuesday'   => array( 'opens' => '09:00', 'closes' => '17:00' ),
 		'Wednesday' => array( 'opens' => '09:00', 'closes' => '17:00' ),
 		'Thursday'  => array( 'opens' => '09:00', 'closes' => '17:00' ),
@@ -126,22 +142,20 @@ function hs_locations() {
 			'postal'  => hs_info( 'postal' ),
 			'phone'   => hs_info( 'phone' ),
 			'season'  => 'April – November',
-			'note'    => 'On US Highway 385, eight miles south of Deadwood. Full workshop on site — repairs, fittings and custom orders.',
+			'note'    => 'On US Highway 385, eight miles south of Deadwood — just south of Nemo Road, on the left. Full workshop on site: repairs, fittings and custom orders.',
 			'map'     => 'https://maps.google.com/maps?q=21576+US+HWY+385+Deadwood+SD+57732&output=embed',
 		),
 		array(
 			'key'     => 'cave-creek',
 			'name'    => 'Cave Creek — Winter Shop',
-			// TODO: add the street number if you want an exact map pin rather
-			// than a search for Frontier Town.
-			'street'  => 'Frontier Town, N. Cave Creek Rd',
+			'street'  => 'Frontier Town, 6245 E Cave Creek Rd',
 			'city'    => 'Cave Creek',
 			'region'  => 'AZ',
-			'postal'  => '',
+			'postal'  => '85331',
 			'phone'   => hs_info( 'phone' ),
 			'season'  => 'December – March',
-			'note'    => 'We set up in Frontier Town on N. Cave Creek Road for the winter season. Same leather, same repairs — just warmer.',
-			'map'     => 'https://maps.google.com/maps?q=Frontier+Town+N+Cave+Creek+Rd+Cave+Creek+AZ&output=embed',
+			'note'    => 'We set up in Frontier Town for the winter season. Same leather, same repairs, same hours — just warmer.',
+			'map'     => 'https://maps.google.com/maps?q=6245+E+Cave+Creek+Rd+Cave+Creek+AZ+85331&output=embed',
 		),
 	);
 

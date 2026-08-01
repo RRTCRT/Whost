@@ -114,10 +114,16 @@ $hero_bg  = $hero_img ? ' style="background-image:url(' . esc_url( $hero_img ) .
 		</div>
 
 		<div data-hs-reveal>
-			<span class="hs-eyebrow"><?php esc_html_e( 'Forty years in', 'hide-and-soul' ); ?></span>
-			<h2><?php esc_html_e( 'A family shop, not a factory', 'hide-and-soul' ); ?></h2>
-			<p><?php esc_html_e( 'Every bag, chap, vest and jacket is made start to finish in our shop, by our family. Nothing is drop-shipped and nothing is sewn overseas. If it does not fit right, bring it back and we will make it fit.', 'hide-and-soul' ); ?></p>
-			<p><!-- TODO: replace with the real About copy from the Wix /about-us page. --></p>
+			<span class="hs-eyebrow"><?php esc_html_e( 'Est. 1983', 'hide-and-soul' ); ?></span>
+			<h2><?php esc_html_e( 'Who we are', 'hide-and-soul' ); ?></h2>
+
+			<blockquote style="margin:0 0 1.5rem;padding-left:1.1rem;border-left:3px solid var(--hs-saddle);font-family:var(--hs-font-display);font-size:1.05rem;color:var(--hs-bark);">
+				<?php esc_html_e( '“The bitterness of poor quality remains long after the sweetness of low price is forgotten.”', 'hide-and-soul' ); ?>
+			</blockquote>
+
+			<p><?php esc_html_e( 'Our small family business has a passion to create unique, quality leather garments and accessories that more than exceed your expectations. For over 40 years, Hide and Soul has been crafting premium leather for hunters, bikers and enthusiasts.', 'hide-and-soul' ); ?></p>
+			<p><?php esc_html_e( 'Every handmade item — bag, chap, vest or jacket — is made 100% in our shop, by our family, with a satisfaction guarantee. All our garments come unlined for superior fit and breathability.', 'hide-and-soul' ); ?></p>
+
 			<a class="hs-btn hs-btn--outline" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">
 				<?php esc_html_e( 'Our story', 'hide-and-soul' ); ?>
 			</a>
@@ -138,15 +144,15 @@ $hero_bg  = $hero_img ? ' style="background-image:url(' . esc_url( $hero_img ) .
 			$hides = array(
 				array(
 					'name' => __( 'Deerskin', 'hide-and-soul' ),
-					'copy' => __( 'The softest of the three. Light, breathable and it fits like a glove once it warms to you — the usual pick for vests and shirts.', 'hide-and-soul' ),
+					'copy' => __( 'Softer, and fits like a glove right off the rack. The lightest and most breathable of the three.', 'hide-and-soul' ),
 				),
 				array(
 					'name' => __( 'Elk', 'hide-and-soul' ),
-					'copy' => __( 'Moderately heavy with real insulation. A good middle ground when you want warmth on the bike without the weight of bison.', 'hide-and-soul' ),
+					'copy' => __( 'Moderately heavy with great insulation. The middle ground when you want warmth on the bike without the weight of bison.', 'hide-and-soul' ),
 				),
 				array(
 					'name' => __( 'Bison', 'hide-and-soul' ),
-					'copy' => __( 'Firmer and the most durable hide we cut. Holds its shape, takes abuse, and breaks in over years rather than weeks.', 'hide-and-soul' ),
+					'copy' => __( 'Firmer, with high durability — but it breaks in fantastically into a piece you will wear for years to come.', 'hide-and-soul' ),
 				),
 			);
 

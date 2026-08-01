@@ -109,8 +109,6 @@ function hs_hours_list() {
 	echo '<ul class="hs-hours">';
 
 	foreach ( hs_hours() as $day => $window ) {
-		$label = __( 'Closed', 'hide-and-soul' );
-
 		if ( is_array( $window ) ) {
 			$label = sprintf(
 				/* translators: 1: opening time, 2: closing time */
@@ -118,6 +116,10 @@ function hs_hours_list() {
 				hs_format_time( $window['opens'] ),
 				hs_format_time( $window['closes'] )
 			);
+		} elseif ( is_string( $window ) && '' !== $window ) {
+			$label = $window;
+		} else {
+			$label = __( 'Closed', 'hide-and-soul' );
 		}
 
 		printf(

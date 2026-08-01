@@ -12,15 +12,26 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Render a plain menu from the known page slugs.
+ *
+ * Mirrors the navigation the Wix site actually used, so a fresh install looks
+ * right before anyone builds a menu in Appearance > Menus:
+ *
+ *   Custom Orders · Products (Mens / Womens / Accessories) · Locations ·
+ *   Black Hills Guide · Videos · More (Contact, Repairs & Patches,
+ *   Testimonials, Cleaning & Care, Customer Referral Program)
+ *
+ * Flattened to one level here — build the real nested menu in wp-admin.
  */
 function hs_nav_fallback() {
 	$pages = array(
-		'shop'           => __( 'Shop', 'hide-and-soul' ),
-		'custom-orders'  => __( 'Custom Orders', 'hide-and-soul' ),
-		'repairs'        => __( 'Repairs', 'hide-and-soul' ),
-		'about-us'       => __( 'About', 'hide-and-soul' ),
-		'locations'      => __( 'Locations', 'hide-and-soul' ),
-		'contact'        => __( 'Contact', 'hide-and-soul' ),
+		'shop'                => __( 'Shop', 'hide-and-soul' ),
+		'custom-orders'       => __( 'Custom Orders', 'hide-and-soul' ),
+		'repairs-patches'     => __( 'Repairs & Patches', 'hide-and-soul' ),
+		'locations'           => __( 'Locations', 'hide-and-soul' ),
+		'black-hills-guide'   => __( 'Black Hills Guide', 'hide-and-soul' ),
+		'testimonials'        => __( 'Testimonials', 'hide-and-soul' ),
+		'care'                => __( 'Cleaning & Care', 'hide-and-soul' ),
+		'contact'             => __( 'Contact', 'hide-and-soul' ),
 	);
 
 	echo '<ul>';
