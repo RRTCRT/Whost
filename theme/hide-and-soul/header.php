@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div class="hs-utility">
 	<div class="hs-wrap">
-		<span><?php echo esc_html( hs_info( 'season_note' ) ); ?></span>
+		<span><?php echo esc_html( hs_season_note() ); ?></span>
 		<a href="<?php echo esc_url( hs_phone_href() ); ?>"><?php echo esc_html( hs_info( 'phone' ) ); ?></a>
 	</div>
 </div>

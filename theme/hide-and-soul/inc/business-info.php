@@ -107,11 +107,9 @@ function hs_format_time( $time ) {
 /**
  * Storefront locations.
  *
- * The Deadwood shop is the only location recorded in the Wix account's
- * Locations settings — it is the confirmed one. Search listings also mention
- * Custer, SD and a winter outpost in Cave Creek, AZ; those are commented out
- * below rather than guessed at. Fill in the real addresses and uncomment them,
- * or delete them if they are no longer trading.
+ * Two shops, run as one seasonal circuit: the Black Hills through the warm
+ * months, Arizona over the winter. The Custer, SD shop that appears in older
+ * directory listings is closed and is deliberately not represented here.
  *
  * The first entry is the primary location for structured data and the footer.
  *
@@ -120,6 +118,7 @@ function hs_format_time( $time ) {
 function hs_locations() {
 	$locations = array(
 		array(
+			'key'     => 'black-hills',
 			'name'    => 'Deadwood — Main Shop',
 			'street'  => hs_info( 'street' ),
 			'city'    => hs_info( 'city' ),
@@ -130,30 +129,20 @@ function hs_locations() {
 			'note'    => 'On US Highway 385, eight miles south of Deadwood. Full workshop on site — repairs, fittings and custom orders.',
 			'map'     => 'https://maps.google.com/maps?q=21576+US+HWY+385+Deadwood+SD+57732&output=embed',
 		),
-		/*
 		array(
-			'name'   => 'Custer',
-			'street' => '',
-			'city'   => 'Custer',
-			'region' => 'SD',
-			'postal' => '',
-			'phone'  => hs_info( 'phone' ),
-			'season' => 'Summer season',
-			'note'   => '',
-			'map'    => '',
+			'key'     => 'cave-creek',
+			'name'    => 'Cave Creek — Winter Shop',
+			// TODO: add the street number if you want an exact map pin rather
+			// than a search for Frontier Town.
+			'street'  => 'Frontier Town, N. Cave Creek Rd',
+			'city'    => 'Cave Creek',
+			'region'  => 'AZ',
+			'postal'  => '',
+			'phone'   => hs_info( 'phone' ),
+			'season'  => 'December – March',
+			'note'    => 'We set up in Frontier Town on N. Cave Creek Road for the winter season. Same leather, same repairs — just warmer.',
+			'map'     => 'https://maps.google.com/maps?q=Frontier+Town+N+Cave+Creek+Rd+Cave+Creek+AZ&output=embed',
 		),
-		array(
-			'name'   => 'Cave Creek — Winter Outpost',
-			'street' => '',
-			'city'   => 'Cave Creek',
-			'region' => 'AZ',
-			'postal' => '',
-			'phone'  => hs_info( 'phone' ),
-			'season' => 'December – March',
-			'note'   => '',
-			'map'    => '',
-		),
-		*/
 	);
 
 	/**
@@ -162,6 +151,55 @@ function hs_locations() {
 	 * @param array $locations Location rows.
 	 */
 	return apply_filters( 'hs_locations', $locations );
+}
+
+/**
+ * Which shop is open right now.
+ *
+ * The business moves: Black Hills April–November, Cave Creek December–March.
+ * A hard-coded "we're in South Dakota" banner is wrong a third of the year,
+ * so the header line follows the calendar instead.
+ *
+ * Uses the site's timezone, not the server's.
+ *
+ * @return string Either 'black-hills' or 'cave-creek'.
+ */
+function hs_current_season() {
+	$month = (int) current_time( 'n' );
+
+	// December (12) through March (3).
+	$season = ( 12 === $month || $month <= 3 ) ? 'cave-creek' : 'black-hills';
+
+	/**
+	 * Filter the active season, e.g. to pin it during a changeover week.
+	 *
+	 * @param string $season 'black-hills' or 'cave-creek'.
+	 * @param int    $month  Current month, 1-12.
+	 */
+	return apply_filters( 'hs_current_season', $season, $month );
+}
+
+/**
+ * Season-aware line for the top bar.
+ *
+ * Falls back to the Customizer value if one has been set by hand.
+ *
+ * @return string
+ */
+function hs_season_note() {
+	$override = get_theme_mod( 'hs_season_note', '' );
+	$defaults = hs_info_defaults();
+
+	// Only treat it as an override if it differs from the shipped default.
+	if ( $override && $override !== $defaults['season_note'] ) {
+		return $override;
+	}
+
+	if ( 'cave-creek' === hs_current_season() ) {
+		return __( 'Winter season — find us at Frontier Town, N. Cave Creek Rd, Cave Creek, AZ.', 'hide-and-soul' );
+	}
+
+	return __( 'Open in the Black Hills — 8 miles south of Deadwood on US Hwy 385.', 'hide-and-soul' );
 }
 
 /**

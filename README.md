@@ -100,9 +100,9 @@ find theme -name '*.php' -exec php -l {} \;
 Full breakdown of verified vs. unverified at the bottom of
 [docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md). The short list:
 
-- **Custer and Cave Creek** — no Locations record exists in your Wix account,
-  only Deadwood. They're commented out in `inc/business-info.php` rather than
-  guessed. Add the real addresses or drop them.
+- **Cave Creek street number** — the winter shop is set to Frontier Town on
+  N. Cave Creek Rd, and the map searches for it by name. Add the street number
+  in `inc/business-info.php` if you want an exact pin.
 - **Shop hours** — taken from directory listings, not your site. These feed the
   structured data Google shows, so they're worth a minute.
 - Whether `/bh-guide` and `/crp` should keep those slugs

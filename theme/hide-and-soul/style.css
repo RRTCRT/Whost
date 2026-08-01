@@ -689,6 +689,27 @@ img {
 	border-radius: var(--hs-radius);
 }
 
+.hs-location.is-open-now {
+	border-color: var(--hs-saddle);
+	box-shadow: 0 0 0 1px var(--hs-saddle);
+}
+
+.hs-badge {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 0.5rem;
+	padding: 0.2rem 0.6rem;
+	background: var(--hs-saddle);
+	color: var(--hs-bone);
+	border-radius: 999px;
+	font-family: var(--hs-font-body);
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
 .hs-location__meta {
 	list-style: none;
 	margin: 0 0 1.25rem;

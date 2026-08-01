@@ -29,16 +29,26 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<div class="hs-callout" style="margin-bottom:2.5rem;">
-				<p><?php echo esc_html( hs_info( 'season_note' ) ); ?></p>
+				<p><?php echo esc_html( hs_season_note() ); ?></p>
 				<a class="hs-btn" href="<?php echo esc_url( hs_phone_href() ); ?>">
 					<?php echo esc_html( hs_info( 'phone' ) ); ?>
 				</a>
 			</div>
 
 			<div class="hs-grid hs-grid--2">
-				<?php foreach ( hs_locations() as $loc ) : ?>
-					<div class="hs-location" data-hs-reveal>
-						<h2 style="font-size:1.4rem;"><?php echo esc_html( $loc['name'] ); ?></h2>
+				<?php
+				$hs_season = hs_current_season();
+
+				foreach ( hs_locations() as $loc ) :
+					$hs_open_now = isset( $loc['key'] ) && $loc['key'] === $hs_season;
+					?>
+					<div class="hs-location<?php echo $hs_open_now ? ' is-open-now' : ''; ?>" data-hs-reveal>
+						<h2 style="font-size:1.4rem;">
+							<?php echo esc_html( $loc['name'] ); ?>
+							<?php if ( $hs_open_now ) : ?>
+								<span class="hs-badge"><?php esc_html_e( 'Open this season', 'hide-and-soul' ); ?></span>
+							<?php endif; ?>
+						</h2>
 
 						<ul class="hs-location__meta">
 							<?php if ( $loc['street'] ) : ?>

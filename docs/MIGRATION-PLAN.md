@@ -182,7 +182,10 @@ done < <(tail -n +2 docs/URL-MAP.csv)
 
 - Business email `roadkillleather@gmail.com`, phone `(605) 578-9746`
 - Address `21576 US HWY 385, Deadwood, SD 57732`, timezone America/Denver, USD
-- The one location on record in Wix: **Deadwood only**
+- Two shops, confirmed by the owner: **Deadwood, SD** (April–November) and
+  **Frontier Town, N. Cave Creek Rd, Cave Creek, AZ** (December–March). Custer,
+  SD is closed. The header and Locations page switch automatically by month —
+  see `hs_current_season()`.
 - All 33 products with descriptions, prices, options, categories and images
 - Site: Premium plan, custom domain, Editor (not Studio), Velo enabled
 
@@ -190,9 +193,11 @@ done < <(tail -n +2 docs/URL-MAP.csv)
 `hideandsoul.com` and the Hostinger staging URL, so no page was rendered or read
 directly:
 
-- **Custer and Cave Creek** appear in search listings but have **no Locations
-  record in Wix**. They're commented out in `hs_locations()` rather than guessed.
-  Fill in real addresses or delete them.
+- **Cave Creek street number.** The winter shop is set up at Frontier Town on
+  N. Cave Creek Rd, Cave Creek, AZ (December–March), confirmed by the owner. The
+  map embed searches for "Frontier Town" rather than pinning an exact address —
+  add the street number in `hs_locations()` if you want a precise pin.
+  *(The Custer, SD shop is closed and has been removed.)*
 - **Opening hours** come from third-party directory listings (Yelp, chamber of
   commerce), not from your site. Check them — they feed the structured data
   Google shows in search results.

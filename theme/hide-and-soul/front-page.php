@@ -197,7 +197,7 @@ $hero_bg  = $hero_img ? ' style="background-image:url(' . esc_url( $hero_img ) .
 			<span class="hs-eyebrow"><?php esc_html_e( 'Find us', 'hide-and-soul' ); ?></span>
 			<h2><?php esc_html_e( 'Eight miles south of Deadwood', 'hide-and-soul' ); ?></h2>
 			<p><?php echo esc_html( hs_address_line() ); ?></p>
-			<p><?php echo esc_html( hs_info( 'season_note' ) ); ?></p>
+			<p><?php echo esc_html( hs_season_note() ); ?></p>
 
 			<div class="hs-hero__actions" style="justify-content:flex-start;">
 				<a class="hs-btn" href="<?php echo esc_url( hs_phone_href() ); ?>"><?php echo esc_html( hs_info( 'phone' ) ); ?></a>
