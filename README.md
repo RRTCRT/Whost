@@ -77,14 +77,16 @@ variations** and set any per-variation prices (some sizes cost more).
 
 ## The one setting worth knowing about
 
-**Appearance ➜ Customize ➜ Hide and Soul ➜ Shop Behaviour ➜ Catalog mode.**
+**Appearance ➜ Customize ➜ Hide and Soul ➜ Shop Behaviour ➜ Catalog mode** —
+**on by default.**
 
-Checked, the store shows products, photos and prices but has no cart or
-checkout — every product page gets a "call the shop" panel instead. Unchecked,
-it's a full WooCommerce store.
+Products, photos and prices all show, but there's no cart or checkout: every
+product page gets a "call the shop" panel instead. That matches what the Wix
+shop page told customers — *"it is hard for our small business to maintain an
+accurate inventory on our website. Please contact us for our current styles,
+colors and sizes."*
 
-You can launch in catalog mode and turn checkout on later without rebuilding
-anything.
+Untick it for a full WooCommerce store with checkout. Nothing needs rebuilding.
 
 ## Local development
 

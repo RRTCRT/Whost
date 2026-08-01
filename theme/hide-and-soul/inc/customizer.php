@@ -124,14 +124,19 @@ function hs_customize_register( $wp_customize ) {
 		'description' => __( 'Switch the store between a full checkout and a call-to-order catalog.', 'hide-and-soul' ),
 	) );
 
+	// Defaults on. The Wix shop page told customers directly: "it is hard for
+	// our small business to maintain an accurate inventory on our website.
+	// Please contact us for our current styles, colors and sizes." A live
+	// checkout would sell stock that may not exist, so the faithful migration
+	// of current behaviour is a catalog. Untick when you're ready to sell.
 	$wp_customize->add_setting( 'hs_catalog_mode', array(
-		'default'           => false,
+		'default'           => true,
 		'sanitize_callback' => 'wp_validate_boolean',
 	) );
 
 	$wp_customize->add_control( 'hs_catalog_mode', array(
 		'label'       => __( 'Catalog mode (no checkout)', 'hide-and-soul' ),
-		'description' => __( 'Hides cart and checkout everywhere and replaces "Add to cart" with a call-to-order panel. Products, prices and photos stay visible.', 'hide-and-soul' ),
+		'description' => __( 'Hides cart and checkout everywhere and replaces "Add to cart" with a call-to-order panel. Products, prices and photos stay visible. On by default, matching how the old site worked — untick it when you are ready to take payments online.', 'hide-and-soul' ),
 		'section'     => 'hs_shop',
 		'type'        => 'checkbox',
 	) );
@@ -155,5 +160,5 @@ add_action( 'customize_register', 'hs_customize_register' );
  * @return bool
  */
 function hs_is_catalog_mode() {
-	return (bool) get_theme_mod( 'hs_catalog_mode', false );
+	return (bool) get_theme_mod( 'hs_catalog_mode', true );
 }

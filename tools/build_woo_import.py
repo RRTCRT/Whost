@@ -34,9 +34,80 @@ MEDIA_BASE = "https://static.wixstatic.com/media/"
 #   Category1         -> leftover from a Wix template, carries no meaning
 #   All Products      -> Wix's implicit catch-all
 FEATURED = "Featured Products"
-DROP_CATEGORIES = {"Category1", "All Products", ""}
+#   Men's Vests       -> superseded by the "Mens Vests" family below; keeping
+#                        both would create two categories differing only by an
+#                        apostrophe, holding the same three products
+DROP_CATEGORIES = {"Category1", "All Products", "Men's Vests", ""}
 
 # Wix option names mapped to cleaner Woo attribute names.
+# The shop page advertises six garment families, but the Wix store only tagged
+# products with gender collections (Mens / Womens / Accessories) — nothing tied
+# the two together, so "Unisex Chaps" was a heading with no products behind it.
+# This maps each product to the family the site actually sells it under. Gender
+# collections are kept as secondary categories so both ways of browsing work.
+PRODUCT_FAMILIES = {
+    "Jackets & Shirts": [
+        "women-s-deerskin-jacket",
+        "deerskin-biker-jacket",
+        "mavrick-shirt",
+        "boone-shirt",
+    ],
+    "Mens Vests": [
+        "mens-deerskin-vest-1",
+        "mens-elk-vest",
+        "mens-bison-vest",
+    ],
+    "Ladies Vests": [
+        "ladies-dress-vest",
+        "ladies-v-neck-club-vest",
+        "ladies-piped-club-vest",
+        "ladies-club-vest",
+        "ladies-rustic-vest",
+    ],
+    "Unisex Chaps": [
+        "deerskin-chaps",
+        "bison-chaps-1",
+        "elk-chaps",
+    ],
+    "Half Chaps": [
+        "adjustable-half-chaps-1",
+    ],
+    "Accessories": [
+        "unisex-harness-cowhide-belt",
+        "cowhide-belt",
+        "western-purse",
+        "fort-worth-cowhide-purse",
+        "minot-bag",
+        "cheyenne-cowhide-clip-on-bag",
+        "medium-rustic-purses",
+        "medium-rustic-purse",
+        "rustic-purses",
+        "hip-bags",
+        "moccasins-slipper",
+        "braided-strap",
+        "bone-vest-extenders",
+        "zippered-deerskin-coin-card-pouch",
+        "skidmore-s-waterproofer",
+        "skidmore-s-waterproofer-1",
+    ],
+}
+
+# Family blurbs, taken verbatim from the shop page, for the Woo category
+# descriptions. These render above the products on each category archive.
+FAMILY_DESCRIPTIONS = {
+    "Jackets & Shirts": "Jackets for men and women, and unisex shirts. No outfit is complete without a jacket that breaks the wind and sun while staying lightweight and breathable.",
+    "Mens Vests": "Made from deer, elk, or bison hides, we've created a men's vest that has been our top seller with different color combinations and XS-5XL patterns. With 4 pockets, it's orderable in tall, solid side or side lace.",
+    "Ladies Vests": "Our ladies' Rustic vest has been a top seller since the early 2000s! With rustic, natural edges, and a wide color variety, it is embellished with natural stones or glass beads. Orderable 2XS-5XL to flatter anyone's figure!",
+    "Unisex Chaps": "Made from deer, elk, or bison hides, we've created beautiful unisex chaps with different colors and 2XS-3XL patterns. These chaps are also very easily customized with fringe, pockets or conchos.",
+    "Half Chaps": "These unisex half-chaps are typically a mix of elk and bison hides in Western or Rustic styles. Perfect for motorcycles or horses. Orderable 2XS-3XL to protect everyone!",
+    "Accessories": "Belts, holsters, bags, purses, wallets, unique jewelry, Damascus knives & sheaths and more!",
+}
+
+# Reverse lookup, built once.
+FAMILY_BY_SLUG = {
+    slug: family for family, slugs in PRODUCT_FAMILIES.items() for slug in slugs
+}
+
 ATTRIBUTE_NAMES = {
     "Stocked Sizes": "Size",
     "Color Choices": "Color",
@@ -147,12 +218,21 @@ def parse_options(opts: list[str]) -> list[tuple[str, str]]:
     return parsed[:4]
 
 
-def build(rows: list[dict], draft: bool) -> tuple[list[dict], list[str]]:
+def build(rows: list[dict], draft: bool) -> tuple[list[dict], list[str], list[str]]:
     out: list[dict] = []
     media: list[str] = []
+    unfamilied: list[str] = []
 
     for product in rows:
         cats, featured = split_categories(product.get("cats", ""))
+
+        # Lead with the garment family, then the gender collections.
+        family = FAMILY_BY_SLUG.get(product["slug"])
+        if family:
+            cats = [family] + [c for c in cats if c != family]
+        else:
+            unfamilied.append(product["name"])
+
         attributes = parse_options(product.get("opts", []))
         images = [MEDIA_BASE + i for i in product.get("imgs", [])]
         media.extend(images)
@@ -184,7 +264,7 @@ def build(rows: list[dict], draft: bool) -> tuple[list[dict], list[str]]:
 
         out.append(record)
 
-    return out, media
+    return out, media, unfamilied
 
 
 def main() -> int:
@@ -194,7 +274,7 @@ def main() -> int:
     args = parser.parse_args()
 
     products = load_products()
-    rows, media = build(products, args.draft)
+    rows, media, unfamilied = build(products, args.draft)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -207,6 +287,20 @@ def main() -> int:
     unique_media = sorted(set(media))
     BUILD.mkdir(exist_ok=True)
     (BUILD / "media-urls.txt").write_text("\n".join(unique_media) + "\n", encoding="utf-8")
+
+    # Category descriptions to paste into Products > Categories in wp-admin.
+    lines = [
+        "# Product category descriptions",
+        "",
+        "Paste each into **Products > Categories > Edit > Description** in wp-admin.",
+        "Taken verbatim from the Wix shop page.",
+        "",
+    ]
+    for family, blurb in FAMILY_DESCRIPTIONS.items():
+        count = sum(1 for r in rows if r["Categories"].split(", ")[0] == family)
+        lines += [f"## {family}  _({count} products)_", "", blurb, ""]
+
+    (BUILD / "product-categories.md").write_text("\n".join(lines), encoding="utf-8")
 
     variable = sum(1 for r in rows if r["Type"] == "variable")
     featured = sum(1 for r in rows if r["Is featured?"] == "1")
@@ -221,6 +315,13 @@ def main() -> int:
 
     if no_price:
         print(f"\nWarning: no price on {len(no_price)}: {', '.join(no_price)}")
+
+    if unfamilied:
+        print(
+            f"\nNot assigned to a garment family ({len(unfamilied)}): {', '.join(unfamilied)}"
+            "\n  These keep their gender categories only. Add them to PRODUCT_FAMILIES"
+            "\n  in this script if they belong under one of the six shop headings."
+        )
 
     print(
         "\nNext:\n"

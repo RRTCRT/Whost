@@ -10,20 +10,35 @@ Staging site: `https://www.mediumseagreen-gerbil-453930.hostingersite.com/`
 
 ## The one decision that shapes everything else
 
-**Does the new site take payments?**
+**Does the new site take payments?** — and the Wix shop page already answered it:
 
-| | Full WooCommerce | Catalog only |
+> "Each item is unique with it's own character and story. Due to this factor, it
+> is hard for our small business to maintain an accurate inventory on our
+> website. **Please contact us for our current styles, colors and sizes today!**"
+
+So the site does not really sell online today; it shows the range and asks
+people to call. The theme therefore **ships in catalog mode by default** — that
+is the faithful migration. A live checkout on an inventory the shop says it
+cannot keep accurate would sell garments that may not exist.
+
+| | Full WooCommerce | Catalog *(default)* |
 |---|---|---|
 | Cart + checkout | Yes | No |
 | Payments, tax, shipping setup | Required | None |
 | Product pages, photos, prices | Yes | Yes |
 | Order path | Online | "Call the shop" |
-| Setup time | ~2 days | ~2 hours |
+| Setup time | ~2 days | Already done |
 
-The theme supports **both** and switches between them with one checkbox at
-**Appearance ➜ Customize ➜ Hide and Soul ➜ Shop Behaviour ➜ Catalog mode**.
-So this is not a decision you have to get right before launch — build the
-catalog, launch, turn checkout on when you're ready.
+One checkbox switches it: **Appearance ➜ Customize ➜ Hide and Soul ➜ Shop
+Behaviour ➜ Catalog mode**. Launch as a catalog, turn checkout on whenever the
+inventory question is solved. Nothing needs rebuilding.
+
+### Reproducing the /shop landing page
+
+The Wix `/shop` page is not a product grid — it's six garment families with a
+blurb each. WooCommerce does this natively: **Customize ➜ WooCommerce ➜ Product
+Catalog ➜ Shop page display ➜ Show categories**. Paste the blurbs from
+`build/product-categories.md` into each category's description.
 
 ---
 
