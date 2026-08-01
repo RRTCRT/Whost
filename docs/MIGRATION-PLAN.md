@@ -119,6 +119,42 @@ indexed product URL — `/product-page/deerskin-chaps`, `/product-page/western-p
 — keeps working with no redirect. This is the single highest-value SEO move in
 the whole migration; don't change the base afterwards.
 
+## Price and hours conflicts to settle before launch
+
+These are contradictions **already live on the Wix site** — the migration just
+made them visible by putting the numbers side by side. Each one needs a
+decision, not a code change.
+
+### Prices: custom-orders page vs. the shop
+
+| Garment | Custom-orders page | Shop product | |
+|---|--:|--:|---|
+| Maverick Shirt | $899 | $999 | conflict |
+| Ladies Jacket | $1,199 *(Basic Ladies Jacket)* | $1,099 *(Women's Deerskin Jacket)* | conflict |
+| Men's Jacket | $1,299 *(Basic Men's Jacket)* | $1,195 *(Deerskin Jacket)* | conflict |
+| Boone Shirt | $999 | $999 | ✅ |
+| Men's vests (deer/elk/bison) | $525 / $575 / $649 | same | ✅ |
+| Chaps, 1/2 chaps, ladies vests | $895 / $399 / $399 | same | ✅ |
+
+The two jacket rows might be genuinely different garments — a "Basic Ladies
+Jacket" need not be the "Women's Deerskin Jacket". If so, say so on the page.
+If they're the same thing, pick a price.
+
+### Adjustable Half Chaps contradicts itself
+
+The product is **listed at $399**, but its own description says *"Our basic pair
+starts at $295"* and *"an upgraded CUSTOM pair that starts at $550"*. Three
+numbers for one product, on one page.
+
+### Hours
+
+The owner gives **Tue–Sat 9–5, Sun 10–4, Mon by arrangement**. The Wix homepage
+advertises **Wed–Sat 10–5, Sun 10–4, closed Mon**. The theme uses the owner's
+version. Whichever is stale is costing walk-in customers.
+
+Update `hs_base_prices()` and `hs_hours()` in
+`theme/hide-and-soul/inc/business-info.php` once these are settled.
+
 ## Phase 5 — URLs and redirects
 
 Most pages keep their Wix slug, so no redirect is needed. The leftovers are

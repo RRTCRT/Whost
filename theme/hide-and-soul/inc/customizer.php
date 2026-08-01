@@ -33,7 +33,8 @@ function hs_customize_register( $wp_customize ) {
 	$fields = array(
 		'legal_name'  => array( __( 'Business name', 'hide-and-soul' ), 'text' ),
 		'tagline'     => array( __( 'Tagline', 'hide-and-soul' ), 'text' ),
-		'phone'       => array( __( 'Phone', 'hide-and-soul' ), 'text' ),
+		'phone'        => array( __( 'Shop phone', 'hide-and-soul' ), 'text' ),
+		'custom_phone' => array( __( 'Custom orders phone (Jenn)', 'hide-and-soul' ), 'text' ),
 		'email'       => array( __( 'Email', 'hide-and-soul' ), 'email' ),
 		'street'      => array( __( 'Street address', 'hide-and-soul' ), 'text' ),
 		'city'        => array( __( 'City', 'hide-and-soul' ), 'text' ),

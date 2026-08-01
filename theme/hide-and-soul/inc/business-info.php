@@ -21,6 +21,9 @@ function hs_info_defaults() {
 		// The homepage says "est. 1983" — not 1984, as directory listings claim.
 		'tagline'      => 'Handcrafted leather since 1983',
 		'phone'        => '(605) 578-9746',
+		// The custom-orders page routes callers straight to Jenn on a separate
+		// line rather than the shop number.
+		'custom_phone' => '(406) 788-5352',
 		// Confirmed from the Wix site's contact settings.
 		'email'        => 'roadkillleather@gmail.com',
 		'street'       => '21576 US HWY 385',
@@ -54,10 +57,11 @@ function hs_info( $key ) {
 /**
  * Phone number reduced to digits for tel: links.
  *
+ * @param string $key Which number — 'phone' (shop) or 'custom_phone' (Jenn).
  * @return string
  */
-function hs_phone_href() {
-	$digits = preg_replace( '/\D+/', '', hs_info( 'phone' ) );
+function hs_phone_href( $key = 'phone' ) {
+	$digits = preg_replace( '/\D+/', '', hs_info( $key ) );
 
 	if ( 10 === strlen( $digits ) ) {
 		$digits = '1' . $digits;
@@ -118,6 +122,51 @@ function hs_format_time( $time ) {
 	$stamp = strtotime( $time );
 
 	return $stamp ? date_i18n( 'g:i a', $stamp ) : $time;
+}
+
+/**
+ * Base prices for custom work, as published on the custom-orders page.
+ *
+ * Kept here rather than typed into page content so a price rise is one edit,
+ * not a hunt through the editor.
+ *
+ * Heads up: some of these disagree with the WooCommerce catalogue — see
+ * docs/MIGRATION-PLAN.md. Where they conflict, decide which is right before
+ * launch rather than shipping two prices for the same garment.
+ *
+ * @return array<string, array<string, int>> Group label => item => price in USD.
+ */
+function hs_base_prices() {
+	$prices = array(
+		'Vests' => array(
+			'All Ladies Vests'  => 399,
+			"Deer Men's Vest"   => 525,
+			"Elk Men's Vest"    => 575,
+			"Bison Men's Vest"  => 649,
+		),
+		'Chaps' => array(
+			'All Chaps'     => 895,
+			'All 1/2 Chaps' => 399,
+		),
+		'Shirts' => array(
+			'Basic Shirt'             => 899,
+			'Maverick Pullover Shirt' => 899,
+			'Boone Pullover Shirt'    => 999,
+			'Snap Front Shirt'        => 1199,
+		),
+		'Jackets' => array(
+			'Western Fringed Jacket' => 1199,
+			'Basic Ladies Jacket'    => 1199,
+			"Basic Men's Jacket"     => 1299,
+		),
+	);
+
+	/**
+	 * Filter the published base prices.
+	 *
+	 * @param array $prices Group => item => price.
+	 */
+	return apply_filters( 'hs_base_prices', $prices );
 }
 
 /**
