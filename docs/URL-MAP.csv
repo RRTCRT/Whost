@@ -33,3 +33,4 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /product-page/mavrick-shirt,/product-page/mavrick-shirt,woo permalink base,Verified — slug misspells "Maverick"; keep it for SEO
 /product-page/medium-rustic-purse,/product-page/medium-rustic-purse,woo permalink base,Verified — slug says medium but product is "Large Rustic Purse"
 /product-page/skidmore-s-waterproofer-1,/product-page/skidmore-s-waterproofer-1,woo permalink base,Verified — this is Leather Cream; -waterproofer is the other one
+/shop-accessories,/product-category/accessories/,mu-plugin,301 to the Woo category
