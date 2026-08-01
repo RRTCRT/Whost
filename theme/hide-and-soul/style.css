@@ -25,9 +25,22 @@ Tags: custom-menu, featured-images, threaded-comments, translation-ready, e-comm
 	--hs-cream:     #f6f1e7; /* page background */
 	--hs-parchment: #ede4d3; /* alt sections */
 	--hs-bone:      #ffffff;
-	--hs-ink:       #2a2320; /* body copy */
+	--hs-ink:       #2a2320; /* body copy, light mode / print */
 	--hs-muted:     #6c5f55;
 	--hs-line:      #d9cdb9;
+
+	/* Semantic roles. The site runs dark — black ground, cream type — so these
+	   map the palette to jobs rather than colours. Flipping the theme means
+	   changing these eleven values, not hunting through the stylesheet. */
+	--hs-bg:         #12100d; /* page ground */
+	--hs-bg-alt:     #1b1712; /* alternating bands, table heads */
+	--hs-surface:    #201a14; /* cards, inputs, menus */
+	--hs-text:       #e7ddcd; /* body copy */
+	--hs-heading:    #f6f1e7; /* headings, brand */
+	--hs-muted-text: #a2937f; /* secondary copy */
+	--hs-border:     #383026; /* hairlines */
+	--hs-link:       #d9903f; /* links — brighter than saddle, which is too
+	                             dark to read against the ground */
 
 	--hs-font-display: "Bitter", "Georgia", "Times New Roman", serif;
 	--hs-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -61,8 +74,8 @@ html { scroll-behavior: smooth; }
 
 body {
 	margin: 0;
-	background: var(--hs-cream);
-	color: var(--hs-ink);
+	background: var(--hs-bg);
+	color: var(--hs-text);
 	font-family: var(--hs-font-body);
 	font-size: 1.0625rem;
 	line-height: 1.7;
@@ -71,7 +84,7 @@ body {
 
 h1, h2, h3, h4, h5 {
 	font-family: var(--hs-font-display);
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 	line-height: 1.18;
 	margin: 0 0 0.5em;
 	font-weight: 700;
@@ -84,13 +97,13 @@ h3 { font-size: clamp(1.25rem, 2.4vw, 1.55rem); }
 p { margin: 0 0 1.2em; }
 
 a {
-	color: var(--hs-saddle);
+	color: var(--hs-link);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 3px;
 }
 
 a:hover,
-a:focus { color: var(--hs-copper); }
+a:focus { color: var(--hs-buckskin); }
 
 img {
 	max-width: 100%;
@@ -139,7 +152,7 @@ img {
 
 .hs-section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .hs-section--tight { padding-block: clamp(2rem, 4vw, 3rem); }
-.hs-section--alt { background: var(--hs-parchment); }
+.hs-section--alt { background: var(--hs-bg-alt); }
 .hs-section--dark { background: var(--hs-hide); color: var(--hs-parchment); }
 .hs-section--dark h2,
 .hs-section--dark h3 { color: var(--hs-cream); }
@@ -151,7 +164,7 @@ img {
 }
 
 .hs-section__head p {
-	color: var(--hs-muted);
+	color: var(--hs-muted-text);
 	font-size: 1.1rem;
 	margin-bottom: 0;
 }
@@ -163,7 +176,7 @@ img {
 	font-size: 0.78rem;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
-	color: var(--hs-copper);
+	color: var(--hs-buckskin);
 	margin-bottom: 0.6rem;
 	font-weight: 700;
 }
@@ -219,7 +232,8 @@ img {
 
 .hs-btn--outline {
 	background: transparent;
-	color: var(--hs-saddle);
+	color: var(--hs-link);
+	border-color: var(--hs-link);
 }
 
 .hs-btn--outline:hover,
@@ -268,8 +282,8 @@ img {
 	position: sticky;
 	top: 0;
 	z-index: 100;
-	background: var(--hs-cream);
-	border-bottom: 1px solid var(--hs-line);
+	background: var(--hs-bg);
+	border-bottom: 1px solid var(--hs-border);
 }
 
 .hs-header__inner {
@@ -285,7 +299,7 @@ img {
 	align-items: center;
 	gap: 0.75rem;
 	text-decoration: none;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 }
 
 .hs-brand img { max-height: 62px; width: auto; }
@@ -304,7 +318,7 @@ img {
 	font-size: 0.68rem;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
-	color: var(--hs-muted);
+	color: var(--hs-muted-text);
 	font-weight: 600;
 }
 
@@ -321,7 +335,7 @@ img {
 .hs-nav a {
 	display: block;
 	padding: 0.4rem 0;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 	font-size: 0.86rem;
 	font-weight: 700;
 	letter-spacing: 0.09em;
@@ -348,8 +362,8 @@ img {
 	display: block;
 	min-width: 14rem;
 	padding: 0.5rem 0;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	box-shadow: var(--hs-shadow);
 	opacity: 0;
 	visibility: hidden;
@@ -374,7 +388,7 @@ img {
 	font-size: 0.92rem;
 }
 
-.hs-nav .sub-menu a:hover { background: var(--hs-parchment); }
+.hs-nav .sub-menu a:hover { background: var(--hs-bg-alt); }
 
 .hs-header__actions {
 	display: flex;
@@ -384,7 +398,7 @@ img {
 
 .hs-cart-link {
 	position: relative;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 0.86rem;
@@ -411,9 +425,9 @@ img {
 	gap: 0.5rem;
 	padding: 0.6rem 0.9rem;
 	background: transparent;
-	border: 2px solid var(--hs-line);
+	border: 2px solid var(--hs-border);
 	border-radius: var(--hs-radius);
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 	font: inherit;
 	font-size: 0.8rem;
 	font-weight: 700;
@@ -445,8 +459,8 @@ img {
 		left: 0;
 		right: 0;
 		display: none;
-		background: var(--hs-cream);
-		border-bottom: 1px solid var(--hs-line);
+		background: var(--hs-surface);
+		border-bottom: 1px solid var(--hs-border);
 		box-shadow: var(--hs-shadow-lg);
 		max-height: calc(100vh - var(--hs-header-h));
 		overflow-y: auto;
@@ -463,7 +477,7 @@ img {
 
 	.hs-nav a {
 		padding: 0.85rem 0;
-		border-bottom: 1px solid var(--hs-line);
+		border-bottom: 1px solid var(--hs-border);
 	}
 
 	.hs-nav .sub-menu {
@@ -546,12 +560,12 @@ img {
 /* Breadcrumbs */
 .hs-breadcrumbs {
 	font-size: 0.85rem;
-	color: var(--hs-muted);
+	color: var(--hs-muted-text);
 	padding-block: 0.85rem;
-	border-bottom: 1px solid var(--hs-line);
+	border-bottom: 1px solid var(--hs-border);
 }
 
-.hs-breadcrumbs a { color: var(--hs-muted); }
+.hs-breadcrumbs a { color: var(--hs-muted-text); }
 
 /* ==========================================================================
    7. Cards
@@ -560,8 +574,8 @@ img {
 .hs-card {
 	display: flex;
 	flex-direction: column;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
 	overflow: hidden;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -571,7 +585,7 @@ img {
 
 .hs-card__media {
 	aspect-ratio: 4 / 3;
-	background: var(--hs-parchment);
+	background: var(--hs-bg-alt);
 	overflow: hidden;
 }
 
@@ -583,7 +597,7 @@ img {
 
 .hs-card__body { padding: 1.25rem 1.35rem 1.5rem; flex: 1 1 auto; }
 .hs-card__body h3 { margin-bottom: 0.4rem; }
-.hs-card__body p { color: var(--hs-muted); font-size: 0.97rem; margin-bottom: 1rem; }
+.hs-card__body p { color: var(--hs-muted-text); font-size: 0.97rem; margin-bottom: 1rem; }
 
 .hs-card__link {
 	font-weight: 700;
@@ -648,13 +662,13 @@ img {
 
 .hs-material {
 	padding: 1.5rem;
-	background: var(--hs-bone);
+	background: var(--hs-surface);
 	border-left: 4px solid var(--hs-saddle);
 	border-radius: var(--hs-radius);
 }
 
 .hs-material h3 { margin-bottom: 0.3rem; }
-.hs-material p { margin-bottom: 0; color: var(--hs-muted); font-size: 0.97rem; }
+.hs-material p { margin-bottom: 0; color: var(--hs-muted-text); font-size: 0.97rem; }
 
 .hs-quote {
 	padding: 1.75rem;
@@ -697,8 +711,8 @@ img {
 /* Location card */
 .hs-location {
 	padding: 1.75rem;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
 }
 
@@ -734,11 +748,11 @@ img {
 	display: flex;
 	gap: 0.6rem;
 	padding: 0.35rem 0;
-	border-bottom: 1px dashed var(--hs-line);
+	border-bottom: 1px dashed var(--hs-border);
 }
 
 .hs-location__meta li:last-child { border-bottom: 0; }
-.hs-location__meta strong { min-width: 5.5rem; color: var(--hs-bark); }
+.hs-location__meta strong { min-width: 5.5rem; color: var(--hs-heading); }
 
 .hs-map {
 	aspect-ratio: 16 / 9;
@@ -773,7 +787,7 @@ img {
 	border-left: 4px solid var(--hs-saddle);
 	font-family: var(--hs-font-display);
 	font-size: 1.15rem;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 }
 
 .hs-entry__content table {
@@ -785,15 +799,15 @@ img {
 .hs-entry__content th,
 .hs-entry__content td {
 	padding: 0.7rem 0.85rem;
-	border: 1px solid var(--hs-line);
+	border: 1px solid var(--hs-border);
 	text-align: left;
 }
 
-.hs-entry__content th { background: var(--hs-parchment); font-family: var(--hs-font-display); }
+.hs-entry__content th { background: var(--hs-bg-alt); font-family: var(--hs-font-display); }
 
 .hs-entry__meta {
 	font-size: 0.85rem;
-	color: var(--hs-muted);
+	color: var(--hs-muted-text);
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	margin-bottom: 1.5rem;
@@ -820,7 +834,7 @@ img {
 .wp-caption-text,
 .wp-block-image figcaption {
 	font-size: 0.87rem;
-	color: var(--hs-muted);
+	color: var(--hs-muted-text);
 	text-align: center;
 }
 
@@ -839,10 +853,10 @@ select,
 textarea {
 	width: 100%;
 	padding: 0.7rem 0.85rem;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
-	color: var(--hs-ink);
+	color: var(--hs-text);
 	font: inherit;
 	font-size: 1rem;
 }
@@ -863,7 +877,7 @@ label {
 	font-size: 0.88rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 }
 
 button,
@@ -945,7 +959,7 @@ input[type="submit"] { font: inherit; }
 	z-index: 90;
 	display: none;
 	gap: 1px;
-	background: var(--hs-line);
+	background: var(--hs-border);
 }
 
 .hs-callbar a {
@@ -978,7 +992,7 @@ input[type="submit"] { font: inherit; }
 	list-style: none;
 	margin: 0 0 1.5rem;
 	padding: 1rem 1.25rem;
-	background: var(--hs-parchment);
+	background: var(--hs-bg-alt);
 	border-left: 4px solid var(--hs-saddle);
 	border-radius: var(--hs-radius);
 }
@@ -1001,8 +1015,8 @@ input[type="submit"] { font: inherit; }
 	width: auto !important;
 	margin: 0 !important;
 	float: none !important;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
 	overflow: hidden;
 	text-align: center;
@@ -1020,13 +1034,13 @@ input[type="submit"] { font: inherit; }
 	padding: 1rem 1rem 0.35rem;
 	font-family: var(--hs-font-display);
 	font-size: 1.05rem !important;
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 }
 
 .woocommerce ul.products li.product .price {
 	display: block;
 	padding: 0 1rem;
-	color: var(--hs-saddle) !important;
+	color: var(--hs-link) !important;
 	font-size: 1rem;
 	font-weight: 700;
 }
@@ -1060,18 +1074,18 @@ input[type="submit"] { font: inherit; }
 
 .woocommerce div.product p.price,
 .woocommerce div.product span.price {
-	color: var(--hs-saddle);
+	color: var(--hs-link);
 	font-size: 1.6rem;
 	font-weight: 700;
 }
 
 .woocommerce div.product .woocommerce-tabs ul.tabs li {
-	background: var(--hs-parchment);
-	border-color: var(--hs-line);
+	background: var(--hs-bg-alt);
+	border-color: var(--hs-border);
 	border-radius: var(--hs-radius) var(--hs-radius) 0 0;
 }
 
-.woocommerce div.product .woocommerce-tabs ul.tabs li.active { background: var(--hs-bone); }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active { background: var(--hs-surface); }
 
 .woocommerce #respond input#submit,
 .woocommerce a.button,
@@ -1104,11 +1118,11 @@ input[type="submit"] { font: inherit; }
 	max-width: 22rem;
 	margin-bottom: 1.75rem;
 	padding: 1.25rem;
-	background: var(--hs-parchment);
+	background: var(--hs-bg-alt);
 	border-radius: var(--hs-radius);
 }
 
-.hs-enquire p { margin: 0; font-size: 0.95rem; color: var(--hs-muted); }
+.hs-enquire p { margin: 0; font-size: 0.95rem; color: var(--hs-muted-text); }
 
 /* ==========================================================================
    13. Pagination + comments
@@ -1128,10 +1142,10 @@ input[type="submit"] { font: inherit; }
 	min-width: 2.5rem;
 	height: 2.5rem;
 	padding: 0 0.6rem;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
-	color: var(--hs-bark);
+	color: var(--hs-heading);
 	text-decoration: none;
 	font-weight: 700;
 }
@@ -1148,8 +1162,8 @@ input[type="submit"] { font: inherit; }
 .hs-comments .comment-body {
 	padding: 1.25rem;
 	margin-bottom: 1rem;
-	background: var(--hs-bone);
-	border: 1px solid var(--hs-line);
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
 	border-radius: var(--hs-radius);
 }
 
@@ -1184,7 +1198,7 @@ input[type="submit"] { font: inherit; }
 	justify-content: space-between;
 	gap: 1rem;
 	padding: 0.4rem 0.6rem;
-	border-bottom: 1px dashed var(--hs-line);
+	border-bottom: 1px dashed var(--hs-border);
 }
 
 .hs-hours li:last-child { border-bottom: 0; }
@@ -1195,8 +1209,8 @@ input[type="submit"] { font: inherit; }
 	font-weight: 700;
 }
 
-.hs-hours__day { color: var(--hs-bark); }
-.hs-hours__closed { color: var(--hs-muted); }
+.hs-hours__day { color: var(--hs-heading); }
+.hs-hours__closed { color: var(--hs-muted-text); }
 
 /* ==========================================================================
    15. Print
@@ -1206,4 +1220,52 @@ input[type="submit"] { font: inherit; }
 	.hs-header, .hs-utility, .hs-footer, .hs-callbar, .hs-hero__actions { display: none !important; }
 	body { background: #fff; color: #000; font-size: 12pt; }
 	a::after { content: " (" attr(href) ")"; font-size: 0.85em; }
+}
+
+/* ==========================================================================
+   16. Desktop nav pill
+   
+   The site's signature: a cream lozenge floating on the black ground, with
+   dark type inside it. Scoped to desktop — on mobile the nav becomes a
+   full-width panel and the pill would fight the layout.
+   ========================================================================== */
+
+@media (min-width: 980px) {
+	.hs-nav > ul {
+		background: var(--hs-cream);
+		border-radius: 999px;
+		padding: 0.5rem 2rem;
+		box-shadow: 0 3px 16px rgba(0, 0, 0, 0.4);
+	}
+
+	.hs-nav > ul > li > a {
+		color: var(--hs-hide);
+		border-bottom-color: transparent;
+	}
+
+	.hs-nav > ul > li > a:hover,
+	.hs-nav > ul > li > a:focus,
+	.hs-nav > ul > .current-menu-item > a,
+	.hs-nav > ul > .current-menu-ancestor > a {
+		color: var(--hs-copper);
+		border-bottom-color: var(--hs-copper);
+	}
+
+	/* Dropdowns are cream too, matching the pill they hang from. */
+	.hs-nav .sub-menu {
+		left: 0;
+		padding: 0.6rem 0;
+		background: var(--hs-cream);
+		border: 0;
+		border-radius: 14px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+	}
+
+	.hs-nav .sub-menu a { color: var(--hs-hide); }
+
+	.hs-nav .sub-menu a:hover,
+	.hs-nav .sub-menu a:focus {
+		background: var(--hs-parchment);
+		color: var(--hs-copper);
+	}
 }
