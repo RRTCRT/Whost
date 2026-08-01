@@ -20,8 +20,9 @@ function hs_info_defaults() {
 		'legal_name'   => 'Hide and Soul Leatherworks',
 		'tagline'      => 'Handcrafted leather since 1984',
 		'phone'        => '(605) 578-9746',
-		'email'        => 'info@hideandsoul.com',
-		'street'       => '21576 U.S. Hwy 385',
+		// Confirmed from the Wix site's contact settings.
+		'email'        => 'roadkillleather@gmail.com',
+		'street'       => '21576 US HWY 385',
 		'city'         => 'Deadwood',
 		'region'       => 'SD',
 		'postal'       => '57732',
@@ -106,8 +107,13 @@ function hs_format_time( $time ) {
 /**
  * Storefront locations.
  *
- * Edit this list to add, remove or reorder shops. The first entry is treated
- * as the primary location for structured data and the footer address.
+ * The Deadwood shop is the only location recorded in the Wix account's
+ * Locations settings — it is the confirmed one. Search listings also mention
+ * Custer, SD and a winter outpost in Cave Creek, AZ; those are commented out
+ * below rather than guessed at. Fill in the real addresses and uncomment them,
+ * or delete them if they are no longer trading.
+ *
+ * The first entry is the primary location for structured data and the footer.
  *
  * @return array<int, array<string, string>>
  */
@@ -122,30 +128,32 @@ function hs_locations() {
 			'phone'   => hs_info( 'phone' ),
 			'season'  => 'April – November',
 			'note'    => 'On US Highway 385, eight miles south of Deadwood. Full workshop on site — repairs, fittings and custom orders.',
-			'map'     => 'https://maps.google.com/maps?q=21576+US-385+Deadwood+SD+57732&output=embed',
+			'map'     => 'https://maps.google.com/maps?q=21576+US+HWY+385+Deadwood+SD+57732&output=embed',
+		),
+		/*
+		array(
+			'name'   => 'Custer',
+			'street' => '',
+			'city'   => 'Custer',
+			'region' => 'SD',
+			'postal' => '',
+			'phone'  => hs_info( 'phone' ),
+			'season' => 'Summer season',
+			'note'   => '',
+			'map'    => '',
 		),
 		array(
-			'name'    => 'Custer',
-			'street'  => '', // TODO: confirm street address from the Wix /locations page.
-			'city'    => 'Custer',
-			'region'  => 'SD',
-			'postal'  => '',
-			'phone'   => hs_info( 'phone' ),
-			'season'  => 'Summer season',
-			'note'    => 'TODO: confirm hours and address.',
-			'map'     => '',
+			'name'   => 'Cave Creek — Winter Outpost',
+			'street' => '',
+			'city'   => 'Cave Creek',
+			'region' => 'AZ',
+			'postal' => '',
+			'phone'  => hs_info( 'phone' ),
+			'season' => 'December – March',
+			'note'   => '',
+			'map'    => '',
 		),
-		array(
-			'name'    => 'Cave Creek — Winter Outpost',
-			'street'  => '', // TODO: confirm street address.
-			'city'    => 'Cave Creek',
-			'region'  => 'AZ',
-			'postal'  => '',
-			'phone'   => hs_info( 'phone' ),
-			'season'  => 'December – March',
-			'note'    => 'TODO: confirm hours and address.',
-			'map'     => '',
-		),
+		*/
 	);
 
 	/**

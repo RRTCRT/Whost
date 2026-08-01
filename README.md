@@ -53,15 +53,27 @@ in the page source — a 600px-wide thumbnail of a 3000px photo. The extractor
 strips the `/v1/fill/w_600,h_400,.../` transform off each URL so you download
 the original upload instead of the crop.
 
-## Moving the shop
+## Moving the shop — already pulled
 
-Export from Wix (**Dashboard ➜ Store Products ➜ Export**), then:
+The full catalogue came straight off the Wix Stores API and is committed in
+`data/wix-products-*.json`: **33 products, 212 images**, real descriptions,
+prices, options and categories. Nothing to export by hand.
 
 ```bash
-python3 tools/wix_products_to_woo.py wix-products.csv -o woo-products.csv --draft
+python3 tools/build_woo_import.py --draft
 ```
 
-Import at **WooCommerce ➜ Products ➜ Import**. Woo maps the columns automatically.
+Writes `build/woo-products.csv` → import at **WooCommerce ➜ Products ➜ Import**.
+
+| | |
+|---|---|
+| Products | 27 variable, 6 simple |
+| Featured | 13 |
+| Categories | Accessories, Mens, Men's Vests, Womens |
+| Images | 212, all at original resolution |
+
+After importing, open each variable product ➜ **Variations ➜ Generate
+variations** and set any per-variation prices (some sizes cost more).
 
 ## The one setting worth knowing about
 
@@ -85,10 +97,13 @@ find theme -name '*.php' -exec php -l {} \;
 
 ## What still needs your input
 
-Marked `TODO` in the code, and listed in full at the bottom of
-[docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md):
+Full breakdown of verified vs. unverified at the bottom of
+[docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md). The short list:
 
-- Custer and Cave Creek addresses (`theme/hide-and-soul/inc/business-info.php`)
-- Shop hours — currently taken from directory listings, not your site
+- **Custer and Cave Creek** — no Locations record exists in your Wix account,
+  only Deadwood. They're commented out in `inc/business-info.php` rather than
+  guessed. Add the real addresses or drop them.
+- **Shop hours** — taken from directory listings, not your site. These feed the
+  structured data Google shows, so they're worth a minute.
 - Whether `/bh-guide` and `/crp` should keep those slugs
-- All placeholder body copy in `front-page.php`
+- Placeholder body copy in `front-page.php`

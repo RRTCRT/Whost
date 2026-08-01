@@ -89,13 +89,29 @@ and run a media-library rescan plugin.
 
 ## Phase 4 — The shop
 
-If you're selling, export from Wix (**Store Products ➜ Export**) and convert:
+**Already done.** The full catalogue was pulled live from the Wix Stores API and
+is committed to `data/wix-products-*.json`: **33 products, 212 images**, with the
+real descriptions, prices, options and category assignments.
 
 ```bash
-python3 tools/wix_products_to_woo.py wix-products.csv -o woo-products.csv
+python3 tools/build_woo_import.py --draft
 ```
 
-Import `woo-products.csv` at WooCommerce ➜ Products ➜ Import.
+Writes `build/woo-products.csv` — import at **WooCommerce ➜ Products ➜ Import**.
+
+- 27 variable products (size / colour / style), 6 simple
+- 13 flagged as Featured
+- Categories: Accessories, Mens, Men's Vests, Womens
+
+After importing, open each variable product ➜ **Variations ➜ Generate variations**,
+then set any per-variation prices (several products charge more for XL, or for a
+"Tall" +2″ cut).
+
+Everything is marked **Backorders: notify** rather than hidden when out of stock —
+these are made-to-order goods, and an out-of-stock vest is still orderable.
+
+> `tools/wix_products_to_woo.py` remains for the CSV-export route, but you don't
+> need it: the API pull is more complete than the dashboard export.
 
 **Product URLs**: the theme sets WooCommerce's permalink base to
 `/product-page` on first admin load, which is exactly what Wix used. Every
@@ -160,17 +176,34 @@ done < <(tail -n +2 docs/URL-MAP.csv)
 
 ---
 
-## Known gaps
+## What came from where
 
-Things I could not verify from this environment — the container's network policy
-blocks both `hideandsoul.com` and the Hostinger staging URL, so nothing here was
-checked against the live sites:
+**Confirmed via the Wix API** (authoritative — pulled from your live account):
 
-- **Custer and Cave Creek addresses** are `TODO` in
-  `theme/hide-and-soul/inc/business-info.php` (`hs_locations()`).
-- **Hours** are from third-party directory listings, not your site. Verify them.
-- **The `/bh-guide` and `/crp` pages** — I mapped them to `/black-hills-guide/`
-  and `/referrals/` by guessing at intent. Change the map if that's wrong.
-- **Product catalogue** — I know the categories, not the SKUs or prices.
-- All page copy in the theme templates is written to be replaced. Anything I
-  wasn't sure of is marked `TODO` in a comment.
+- Business email `roadkillleather@gmail.com`, phone `(605) 578-9746`
+- Address `21576 US HWY 385, Deadwood, SD 57732`, timezone America/Denver, USD
+- The one location on record in Wix: **Deadwood only**
+- All 33 products with descriptions, prices, options, categories and images
+- Site: Premium plan, custom domain, Editor (not Studio), Velo enabled
+
+**Still unverified** — the container's network policy blocks both
+`hideandsoul.com` and the Hostinger staging URL, so no page was rendered or read
+directly:
+
+- **Custer and Cave Creek** appear in search listings but have **no Locations
+  record in Wix**. They're commented out in `hs_locations()` rather than guessed.
+  Fill in real addresses or delete them.
+- **Opening hours** come from third-party directory listings (Yelp, chamber of
+  commerce), not from your site. Check them — they feed the structured data
+  Google shows in search results.
+- **`/bh-guide` and `/crp`** — mapped to `/black-hills-guide/` and `/referrals/`
+  by guessing at intent. Change `docs/URL-MAP.csv` if that's wrong.
+- **Page copy** — Wix Editor page content isn't exposed through the API (it
+  lives in the editor document, not a content API). Use your saved HTML with
+  `tools/wix_extract.py` for that, per Phase 3.
+- Placeholder copy in `front-page.php` is marked `TODO` and written to be
+  replaced.
+
+**One content note:** product descriptions were cleaned of Wix's editor markup
+(empty `<p>` tags, `&nbsp;`, inline `<span>` styling). Text, links and lists are
+otherwise verbatim — including the Etsy cross-links, which were kept.

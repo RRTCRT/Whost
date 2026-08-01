@@ -19,3 +19,15 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /account/my-account,/my-account/,mu-plugin,Only relevant if checkout is enabled
 /cart-page,/cart/,mu-plugin,Only relevant if checkout is enabled
 /checkout-page,/checkout/,mu-plugin,Only relevant if checkout is enabled
+/product-page/unisex-harness-cowhide-belt,/product-page/unisex-harness-cowhide-belt,woo permalink base,Verified live product slug
+/product-page/mens-bison-vest,/product-page/mens-bison-vest,woo permalink base,Verified live product slug
+/product-page/mens-elk-vest,/product-page/mens-elk-vest,woo permalink base,Verified live product slug
+/product-page/mens-deerskin-vest-1,/product-page/mens-deerskin-vest-1,woo permalink base,Verified — keep the -1 suffix
+/product-page/deerskin-chaps,/product-page/deerskin-chaps,woo permalink base,Verified live product slug
+/product-page/bison-chaps-1,/product-page/bison-chaps-1,woo permalink base,Verified — keep the -1 suffix
+/product-page/elk-chaps,/product-page/elk-chaps,woo permalink base,Verified live product slug
+/product-page/adjustable-half-chaps-1,/product-page/adjustable-half-chaps-1,woo permalink base,Verified — keep the -1 suffix
+/product-page/cowhide-belt,/product-page/cowhide-belt,woo permalink base,Verified — slug is cowhide-belt but product is "Unisex English Bridle Belt"
+/product-page/mavrick-shirt,/product-page/mavrick-shirt,woo permalink base,Verified — slug misspells "Maverick"; keep it for SEO
+/product-page/medium-rustic-purse,/product-page/medium-rustic-purse,woo permalink base,Verified — slug says medium but product is "Large Rustic Purse"
+/product-page/skidmore-s-waterproofer-1,/product-page/skidmore-s-waterproofer-1,woo permalink base,Verified — this is Leather Cream; -waterproofer is the other one
