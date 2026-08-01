@@ -1,0 +1,21 @@
+old_wix_path,new_wordpress_path,handled_by,notes
+/,/,none,Homepage — front-page.php
+/about-us,/about-us/,slug reuse,Keep the WordPress page slug as "about-us"
+/locations,/locations/,slug reuse,Assign the "Locations" page template
+/care,/care/,slug reuse,Leather care & cleaning guide
+/shop,/shop/,slug reuse,WooCommerce shop page must use this slug
+/repairs-patches,/repairs-patches/,slug reuse,Keep this exact slug
+/shop-mens,/product-category/mens/,mu-plugin,301 to the Woo category
+/shop-womens,/product-category/womens/,mu-plugin,301 to the Woo category
+/home/Mens.html,/product-category/mens/,mu-plugin,Legacy .html path from an older Wix build
+/custom-orders,/custom-orders/,slug reuse,Canonical custom-orders page
+/customorders,/custom-orders/,mu-plugin,Wix duplicate slug
+/customladiesvests,/custom-orders/,mu-plugin,Wix duplicate — consider a #ladies anchor instead
+/customlegging,/custom-orders/,mu-plugin,Chaps & half-chap custom orders
+/bh-guide,/black-hills-guide/,mu-plugin,VERIFY — rename target if you prefer /bh-guide/
+/crp,/referrals/,mu-plugin,VERIFY — customer referral program
+/product-page/<slug>,/product-page/<slug>,woo permalink base,No redirect needed; base set in inc/woocommerce.php
+/product-page/<slug>-1,/product-page/<slug>,mu-plugin,Numeric-suffix fallback for duplicate Wix products
+/account/my-account,/my-account/,mu-plugin,Only relevant if checkout is enabled
+/cart-page,/cart/,mu-plugin,Only relevant if checkout is enabled
+/checkout-page,/checkout/,mu-plugin,Only relevant if checkout is enabled
