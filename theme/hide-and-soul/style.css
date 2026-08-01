@@ -251,6 +251,19 @@ img {
 .hs-utility a { color: var(--hs-buckskin); text-decoration: none; }
 .hs-utility a:hover { text-decoration: underline; }
 
+/* Social row is smaller and borderless inside the top bar. */
+.hs-utility .hs-social { margin-top: 0; gap: 0.4rem; }
+
+.hs-utility .hs-social a {
+	width: 1.75rem;
+	height: 1.75rem;
+	border-color: transparent;
+	color: var(--hs-parchment);
+}
+
+.hs-utility .hs-social a:hover { background: transparent; color: var(--hs-buckskin); }
+.hs-utility .hs-social svg { width: 0.95rem; height: 0.95rem; }
+
 .hs-header {
 	position: sticky;
 	top: 0;

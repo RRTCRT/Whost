@@ -72,6 +72,12 @@ PRODUCT_FAMILIES = {
     "Half Chaps": [
         "adjustable-half-chaps-1",
     ],
+    # Non-leather goods: shirts, stickers, knives and the like. The shop page
+    # doesn't list this heading yet, but the owner keeps them as a separate
+    # group, so it's here ready for stock that isn't cut in the workshop.
+    "Other Items": [
+        "40th-anniversary-shirt",
+    ],
     "Accessories": [
         "unisex-harness-cowhide-belt",
         "cowhide-belt",
@@ -101,6 +107,7 @@ FAMILY_DESCRIPTIONS = {
     "Unisex Chaps": "Made from deer, elk, or bison hides, we've created beautiful unisex chaps with different colors and 2XS-3XL patterns. These chaps are also very easily customized with fringe, pockets or conchos.",
     "Half Chaps": "These unisex half-chaps are typically a mix of elk and bison hides in Western or Rustic styles. Perfect for motorcycles or horses. Orderable 2XS-3XL to protect everyone!",
     "Accessories": "Belts, holsters, bags, purses, wallets, unique jewelry, Damascus knives & sheaths and more!",
+    "Other Items": "Shirts, stickers, knives and everything else in the shop that isn't cut from hide.",
 }
 
 # Reverse lookup, built once.

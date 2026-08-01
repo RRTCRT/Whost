@@ -140,20 +140,29 @@ These are contradictions **already live on the Wix site** — the migration just
 made them visible by putting the numbers side by side. Each one needs a
 decision, not a code change.
 
-### Prices: custom-orders page vs. the shop
+### Prices: three sources, and the store is the odd one out
 
-| Garment | Custom-orders page | Shop product | |
-|---|--:|--:|---|
-| Maverick Shirt | $899 | $999 | conflict |
-| Ladies Jacket | $1,199 *(Basic Ladies Jacket)* | $1,099 *(Women's Deerskin Jacket)* | conflict |
-| Men's Jacket | $1,299 *(Basic Men's Jacket)* | $1,195 *(Deerskin Jacket)* | conflict |
-| Boone Shirt | $999 | $999 | ✅ |
-| Men's vests (deer/elk/bison) | $525 / $575 / $649 | same | ✅ |
-| Chaps, 1/2 chaps, ladies vests | $895 / $399 / $399 | same | ✅ |
+Prices appear in three places — the custom-orders page, the men's shop page,
+and the WooCommerce product itself. Where two pages agree against the store,
+**the store product is almost certainly the stale one.**
 
-The two jacket rows might be genuinely different garments — a "Basic Ladies
-Jacket" need not be the "Women's Deerskin Jacket". If so, say so on the page.
-If they're the same thing, pick a price.
+| Garment | Custom orders | Men's page | Store | Verdict |
+|---|--:|--:|--:|---|
+| Maverick Shirt | $899 | $899 | **$999** | store looks stale → $899 |
+| Men's Jacket | $1,299 | $1,299 | **$1,195** | store looks stale → $1,299 |
+| Snap Front Shirt | $1,199 | $1,199 | *not in store* | add the product |
+| Boone Shirt | $999 | *"from $899"* | $999 | ✅ $999 — the men's page quotes the pair's lower price |
+| Men's vests (deer/elk/bison) | $525 / $575 / $649 | same | same | ✅ |
+| Chaps / 1/2 chaps | $895 / $399 | same | same | ✅ |
+| Ladies vests | $399 | — | $399 | ✅ |
+| **Ladies Jacket** | $1,199 *(Basic Ladies Jacket)* | — | $1,099 *(Women's Deerskin Jacket)* | **still unresolved** |
+
+The ladies jacket is the one with no tiebreaker — the women's page should
+settle it. These may also be genuinely different garments, in which case say so
+rather than picking a number.
+
+**Missing from the store entirely:** Snap Front Shirt ($1,199), Basic Shirt
+($899), Western Fringed Jacket ($1,199). They're advertised but not sellable.
 
 ### Adjustable Half Chaps contradicts itself
 

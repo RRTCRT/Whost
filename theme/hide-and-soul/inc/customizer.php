@@ -46,6 +46,8 @@ function hs_customize_register( $wp_customize ) {
 		'season_note' => array( __( 'Seasonal note (top bar)', 'hide-and-soul' ), 'text' ),
 		'facebook'    => array( __( 'Facebook URL', 'hide-and-soul' ), 'url' ),
 		'instagram'   => array( __( 'Instagram URL', 'hide-and-soul' ), 'url' ),
+		'pinterest'   => array( __( 'Pinterest URL', 'hide-and-soul' ), 'url' ),
+		'youtube'     => array( __( 'YouTube URL', 'hide-and-soul' ), 'url' ),
 	);
 
 	foreach ( $fields as $key => $field ) {

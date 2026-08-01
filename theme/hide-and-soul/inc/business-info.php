@@ -35,8 +35,12 @@ function hs_info_defaults() {
 		'longitude'    => '-103.7691',
 		'hours_note'   => 'Closed Mondays unless you arrange a time with us in advance — give us a call and we will open up.',
 		'season_note'  => 'Winters in Cave Creek, AZ — call ahead for December through March.',
+		// The header links out to four networks — fill in the three URLs the
+		// saved HTML didn't carry.
 		'facebook'     => 'https://www.facebook.com/hideandsoulleather/',
 		'instagram'    => '',
+		'pinterest'    => '',
+		'youtube'      => '',
 		'price_range'  => '$$',
 	);
 }
