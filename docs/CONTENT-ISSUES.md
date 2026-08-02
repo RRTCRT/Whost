@@ -225,7 +225,27 @@ spelling so nothing indexed is lost.
   saved page. The theme embeds the whole How-To playlist instead, which contains
   all three, rather than guessing at individual video IDs.
 
-## 14. Who to trust when sources disagree
+## 14. The referral program never says what you get
+
+`/crp` has a title, the line "sharing rewards.", a sign-up form, and a success
+message reading "Your Customer Number is on its way!" — and nothing else. It
+never states the reward: how much credit, on what, or whether it expires.
+
+Searched the page for it; every "refer", "credit" and "discount" match in the
+HTML is Wix framework code, not content. So the terms were never on the page.
+
+Confirmed against a screenshot of the live page: title, tagline, one photo of a
+customer writing their details beside a Hide and Soul business card, the form,
+and nothing more.
+
+A referral page that doesn't say what the referrer gets won't convert. The
+template leaves a marked placeholder rather than inventing terms — write them
+into the page content and the placeholder disappears.
+
+**Form fields**, from the screenshot: First Name, Last Name, Email, Phone,
+Message. Note this differs from the Contact form (single Name, plus Subject).
+
+## 15. Who to trust when sources disagree
 
 Several people have edited the Wix site over the years and it drifted. The
 owner has taken it over for this migration. Ranking, highest first:

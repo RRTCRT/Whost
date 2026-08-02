@@ -13,7 +13,7 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /customladiesvests,/custom-orders/,mu-plugin,Wix duplicate — consider a #ladies anchor instead
 /customlegging,/custom-orders/,mu-plugin,Chaps & half-chap custom orders
 /bh-guide,/black-hills-guide/,mu-plugin,Confirmed — nav label is "BLACK HILLS GUIDE"
-/crp,/referrals/,mu-plugin,Confirmed — nav label is "CUSTOMER REFERRAL PROG."
+/crp,/referrals/,mu-plugin,Confirmed — nav label is "CUSTOMER REFERRAL PROG."; program terms were never on the page
 /testamonials,/testimonials/,mu-plugin,MISSPELLED on Wix (testAmonials) — 301 to the correct spelling
 /videos,/videos/,slug reuse,Found in the homepage nav — Wix Video app; re-embed YouTube directly
 /product-page/<slug>,/product-page/<slug>,woo permalink base,No redirect needed; base set in inc/woocommerce.php

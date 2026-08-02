@@ -15,8 +15,40 @@ build/                   generated: WordPress import file + media URL list
 ## Start here
 
 1. **[docs/MIGRATION-PLAN.md](docs/MIGRATION-PLAN.md)** — the whole migration, phase by phase
-2. **[docs/HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md)** — getting the code onto the server
-3. **[docs/URL-MAP.csv](docs/URL-MAP.csv)** — every old Wix URL and where it now goes
+2. **[docs/CONTENT-ISSUES.md](docs/CONTENT-ISSUES.md)** — decisions only you can make, **read this one**
+3. **[docs/HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md)** — getting the code onto the server
+4. **[docs/URL-MAP.csv](docs/URL-MAP.csv)** — every old Wix URL and where it now goes
+
+## State of play
+
+All 15 Wix pages are extracted and every one has a template.
+
+| Template | Replaces |
+|---|---|
+| `front-page.php` | Home |
+| `template-about.php` | About Hide & Soul |
+| `template-custom-orders.php` | Custom Orders |
+| `template-locations.php` | Locations |
+| `template-repairs.php` | Repairs & Patches |
+| `template-care.php` | Cleaning & Care |
+| `template-testimonials.php` | Testimonials |
+| `template-videos.php` | Videos *(was the Wix Video app)* |
+| `template-bh-guide.php` | Black Hills Guide |
+| `template-contact.php` | Contact |
+| `template-referrals.php` | Customer Referral Program |
+| WooCommerce | Shop, Mens, Womens, Accessories |
+
+Assign these under **Page Attributes ➜ Template** when you create each page.
+
+## ⏳ Two things to do before Wix is cancelled
+
+Both are unrecoverable afterwards:
+
+1. **Copy the testimonials.** At least eight exist on `/testamonials`; three are
+   saved. They live on Wix's servers, not in the page — see
+   [CONTENT-ISSUES §11](docs/CONTENT-ISSUES.md).
+2. **Re-download the repairs before/after photos.** The captions survived, the
+   images didn't — Wix galleries are JavaScript.
 
 ## Moving your saved Wix pages in
 

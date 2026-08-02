@@ -63,7 +63,9 @@ Catalog ➜ Shop page display ➜ Show categories**. Paste the blurbs from
      contact-form and order emails to actually arrive
    - A contact form: **Fluent Forms** or **WPForms Lite**. Recreate the Wix
      form's five fields — **Name, Email, Phone, Subject, Message**, all
-     required — and drop the shortcode into the Contact page. Set the
+     required — and drop the shortcode into the Contact page. The referral
+     page used a different set: **First Name, Last Name, Email, Phone,
+     Message**. Set the
      notification "from" address to something on your own domain and the
      reply-to to the sender, or Gmail will mark your own replies as spoofed.
    - *Optional:* **Redirection** if you'd rather manage redirects in the admin
