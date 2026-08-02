@@ -447,10 +447,15 @@ def cmd_parse(args: argparse.Namespace) -> int:
         print(f"error: {root} does not exist", file=sys.stderr)
         return 1
 
+    # "Save page as" writes assets into a sibling folder named after the page
+    # plus "_files" — e.g. "Hide and Soul … USA_files". Matching the component
+    # exactly misses those, so every embedded YouTube player, Google Maps frame
+    # and subscribe widget saved inside gets parsed as if it were a page.
     files = sorted(
         p
         for p in root.rglob("*")
-        if p.suffix.lower() in {".html", ".htm"} and "_files" not in p.parts
+        if p.suffix.lower() in {".html", ".htm"}
+        and not any(part.endswith("_files") for part in p.parts)
     )
 
     if not files:

@@ -34,3 +34,4 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /product-page/medium-rustic-purse,/product-page/medium-rustic-purse,woo permalink base,Verified — slug says medium but product is "Large Rustic Purse"
 /product-page/skidmore-s-waterproofer-1,/product-page/skidmore-s-waterproofer-1,woo permalink base,Verified — this is Leather Cream; -waterproofer is the other one
 /shop-accessories,/product-category/accessories/,mu-plugin,301 to the Woo category
+/media-links,/videos/,mu-plugin,Wix Video app page; rebuilt as YouTube embeds

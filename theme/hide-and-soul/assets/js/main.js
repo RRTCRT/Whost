@@ -87,6 +87,32 @@
 	}
 
 	/* -----------------------------------------------------------------
+	 * Click-to-load YouTube embeds
+	 *
+	 * Each placeholder swaps itself for the real iframe on click, so the
+	 * page ships thumbnails instead of thirty-odd YouTube players.
+	 * ----------------------------------------------------------------- */
+
+	document.addEventListener( 'click', function ( event ) {
+		var button = event.target.closest( '[data-hs-embed]' );
+
+		if ( ! button ) {
+			return;
+		}
+
+		var frame = document.createElement( 'iframe' );
+		frame.src = button.getAttribute( 'data-hs-embed' );
+		frame.title = button.getAttribute( 'aria-label' ) || 'YouTube video';
+		frame.loading = 'lazy';
+		frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+		frame.allowFullscreen = true;
+		frame.className = 'hs-video__frame';
+
+		button.replaceWith( frame );
+		frame.focus();
+	} );
+
+	/* -----------------------------------------------------------------
 	 * Today's hours highlight
 	 * ----------------------------------------------------------------- */
 

@@ -41,6 +41,7 @@ function hs_legacy_redirect_map() {
 		'care'               => '/care/',
 		'bh-guide'           => '/black-hills-guide/',
 		'crp'                => '/referrals/',
+		'media-links'        => '/videos/',
 
 		// Wix system paths that have no WordPress equivalent.
 		'account/my-account' => '/my-account/',
