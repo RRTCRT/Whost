@@ -61,7 +61,11 @@ Catalog ➜ Shop page display ➜ Show categories**. Paste the blurbs from
    - **Yoast SEO** or **Rank Math** — for titles, meta descriptions, sitemap
    - **WP Mail SMTP** — Hostinger's default PHP mail lands in spam; you need
      contact-form and order emails to actually arrive
-   - A contact form: **Fluent Forms** or **WPForms Lite**
+   - A contact form: **Fluent Forms** or **WPForms Lite**. Recreate the Wix
+     form's five fields — **Name, Email, Phone, Subject, Message**, all
+     required — and drop the shortcode into the Contact page. Set the
+     notification "from" address to something on your own domain and the
+     reply-to to the sender, or Gmail will mark your own replies as spoofed.
    - *Optional:* **Redirection** if you'd rather manage redirects in the admin
      than in the mu-plugin here
 4. **Delete** the Hostinger starter theme/plugins you aren't using (Hello Dolly,
