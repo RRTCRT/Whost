@@ -1269,3 +1269,91 @@ input[type="submit"] { font: inherit; }
 		color: var(--hs-copper);
 	}
 }
+
+/* ==========================================================================
+   17. Black Hills guide
+   ========================================================================== */
+
+.hs-jump {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.hs-jump a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 1.1rem;
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
+	border-radius: 999px;
+	color: var(--hs-text);
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.hs-jump a:hover,
+.hs-jump a:focus {
+	border-color: var(--hs-link);
+	color: var(--hs-link);
+}
+
+.hs-jump span {
+	padding: 0.05rem 0.45rem;
+	background: var(--hs-bg-alt);
+	border-radius: 999px;
+	font-size: 0.72rem;
+	color: var(--hs-muted-text);
+}
+
+.hs-guide-section { margin-bottom: clamp(2.5rem, 6vw, 4rem); scroll-margin-top: calc(var(--hs-header-h) + 1rem); }
+
+.hs-guide-list {
+	display: grid;
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.hs-guide-list li {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	padding: 0.85rem 1.1rem;
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
+	border-left: 3px solid var(--hs-saddle);
+	border-radius: var(--hs-radius);
+}
+
+.hs-guide-list li.is-warning { border-left-color: var(--hs-buckskin); }
+
+.hs-guide-list__name {
+	font-family: var(--hs-font-display);
+	font-size: 1.02rem;
+	font-weight: 700;
+	color: var(--hs-heading);
+}
+
+.hs-guide-list__town {
+	font-size: 0.85rem;
+	letter-spacing: 0.05em;
+	color: var(--hs-muted-text);
+}
+
+.hs-guide-list__warn {
+	margin-top: 0.35rem;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: var(--hs-buckskin);
+}
+
+.hs-guide-list .hs-badge { font-size: 0.6rem; margin-left: 0.4rem; }

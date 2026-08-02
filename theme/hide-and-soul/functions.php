@@ -15,6 +15,7 @@ require_once HS_DIR . '/inc/setup.php';
 require_once HS_DIR . '/inc/assets.php';
 require_once HS_DIR . '/inc/business-info.php';
 require_once HS_DIR . '/inc/customizer.php';
+require_once HS_DIR . '/inc/black-hills-guide.php';
 require_once HS_DIR . '/inc/template-tags.php';
 require_once HS_DIR . '/inc/nav-walker.php';
 require_once HS_DIR . '/inc/schema.php';
