@@ -85,9 +85,33 @@ Then, in wp-admin:
    structured data Google reads. They are wrong nowhere or wrong everywhere.
 3. Appearance ➜ Customize ➜ **Homepage Hero** — set the background photo and
    headline.
-4. Appearance ➜ Menus — build **Primary** and **Footer** menus.
-5. Settings ➜ Reading ➜ "Your homepage displays: A static page" ➜ Homepage =
+4. Appearance ➜ Menus — build **Primary**, **Footer** and **Legal** menus. The
+   Legal menu renders in the footer's bottom bar; put Privacy Policy and Terms
+   in it.
+5. Create the two legal pages from `legal/*.html` — see below.
+6. Settings ➜ Reading ➜ "Your homepage displays: A static page" ➜ Homepage =
    a page called *Home*. (The theme's `front-page.php` takes over automatically.)
+
+### The legal pages
+
+`legal/privacy-policy.html` and `legal/terms-and-conditions.html` are drafts
+written specifically around this business — made-to-measure work, repairs on
+customers' own property, estimate-only pricing, the satisfaction guarantee, and
+the YouTube and Maps embeds this site actually uses.
+
+For each: create the page, set **Template = Legal**, open the editor's **Code
+editor** (⋮ menu) and paste the file in.
+
+Two things before they go live:
+
+1. **Work through the `TODO` markers.** They mark decisions only you can make —
+   deposit terms, lead times, return window, how long you hold uncollected
+   repairs, whether the guarantee has a time limit, and whether you ship
+   internationally.
+2. **Have a South Dakota attorney read them.** These were written by an AI, not
+   a lawyer. The repairs and liability sections in particular carry real
+   exposure, and the satisfaction guarantee is a promise you are making in
+   public.
 
 ## Phase 3 — Move the content
 

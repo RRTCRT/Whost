@@ -35,3 +35,5 @@ old_wix_path,new_wordpress_path,handled_by,notes
 /product-page/skidmore-s-waterproofer-1,/product-page/skidmore-s-waterproofer-1,woo permalink base,Verified — this is Leather Cream; -waterproofer is the other one
 /shop-accessories,/product-category/accessories/,mu-plugin,301 to the Woo category
 /media-links,/videos/,mu-plugin,Wix Video app page; rebuilt as YouTube embeds
+/privacy-policy,/privacy-policy/,new,New page — no Wix equivalent
+/terms,/terms/,new,New page — no Wix equivalent
