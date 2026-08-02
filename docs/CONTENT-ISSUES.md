@@ -170,7 +170,18 @@ The heading reads **"0VER 40 YEARS OF WORK!"** — that's a zero, not the letter
 O. Easy to miss on screen, and it's a heading, so it carries weight with search
 engines too.
 
-## 10. Who to trust when sources disagree
+## 10. Repairs page — typo and missing gallery photos
+
+- **"Stitching & Seems"** should be **"Seams"**. Corrected in the theme copy.
+- The before/after alterations gallery — roughly a dozen paired photos (dog-chewed
+  sandal, sleeve shortening, length extension, chap extension, whip-stitched
+  edges, back beadwork, custom sidelaces, vest bustling) — is a Wix gallery
+  loaded with JavaScript. **The saved page carried the captions but not the
+  images**, so those photos must be re-uploaded from your own files. They are
+  the most persuasive thing on the page; a repairs page without before/after
+  shots is much weaker.
+
+## 11. Who to trust when sources disagree
 
 Several people have edited the Wix site over the years and it drifted. The
 owner has taken it over for this migration. Ranking, highest first:
