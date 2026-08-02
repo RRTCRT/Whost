@@ -6,6 +6,15 @@ Business Profile match.
 
 Staging site: `https://www.mediumseagreen-gerbil-453930.hostingersite.com/`
 
+**Target: live by September.** Phases 1–4 are largely done — the theme is built
+and the full catalogue is extracted. What remains is page content, the DNS
+cutover, and the content decisions in
+[`CONTENT-ISSUES.md`](CONTENT-ISSUES.md).
+
+> The Wix site has had several editors over the years and has drifted out of
+> date in places. Where a page disagrees with the owner, **the owner is right** —
+> don't carry the old page's version across just because it's written down.
+
 ---
 
 ## The one decision that shapes everything else

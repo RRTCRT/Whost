@@ -123,18 +123,20 @@ The men's page lists **Mahogany** for the Deerskin Vest. The store's colour
 options for that product are Black, Chocolate, Tobacco, Saddle and Smoke —
 no Mahogany.
 
-## 6. Hours — three different answers
+## 6. Hours — three different answers, now ✅ RESOLVED
 
 | Source | Tue | Wed–Sat | Sun | Mon |
 |---|---|---|---|---|
-| **Owner** *(used by the theme)* | 9–5 | 9–5 | 10–4 | by arrangement |
-| Homepage | *not listed* | 10–5 | 10–4 | closed |
-| Locations page | 9–6 | 9–6 | 10–4 | *not listed* |
+| **Owner — correct** | 9–5 | 9–5 | 10–4 | by prior arrangement |
+| Homepage | *not listed* | ~~10–5~~ | 10–4 | closed |
+| Locations page | ~~9–6~~ | ~~9–6~~ | 10–4 | *not listed* |
 
-Every source agrees on Sunday and nothing else. Closing time is 5pm or 6pm
-depending on the page; opening is 9am or 10am; Tuesday is either a trading day
-or absent. Whichever is wrong is turning people away, or keeping the shop open
-for customers who never come.
+The owner has confirmed the first row. The other two are stale — the site has
+had several editors over the years and neither page was kept current. **Do not
+reinstate hours from the old pages during content migration.**
+
+The theme already uses the correct set, and Monday renders as "By appointment"
+while staying out of the structured data.
 
 ## 7. Wix Stores is DISABLED
 
@@ -158,6 +160,24 @@ and committed.
   Cave Creek block. A visitor copying it gets a bad address.
 - Cave Creek gives no street address at all, just "At Frontier Town". The
   theme now carries the real one: 6245 E Cave Creek Rd, Cave Creek, AZ 85331.
+- Cave Creek lists only the mobile. The 605 number is now a Google Voice line
+  that rings Jennifer's mobile, so it reaches her in Arizona too — both numbers
+  are shown for both shops.
+
+## 9. Who to trust when sources disagree
+
+Several people have edited the Wix site over the years and it drifted. The
+owner has taken it over for this migration. Ranking, highest first:
+
+1. **What the owner says** — overrides everything below.
+2. **The Wix Stores catalogue** *(read via API)* — for product options, images
+   and stock, which no page duplicates.
+3. **Shop and custom-order pages** — for prices, where two pages agreeing beat
+   a stale product record.
+4. **The homepage and locations page** — the most-edited, least-maintained; both
+   carried wrong hours.
+
+Target for going live: **September**.
 
 ---
 

@@ -106,7 +106,7 @@ while ( have_posts() ) :
 			<div style="margin-top:clamp(3rem,7vw,4.5rem);">
 				<div class="hs-section__head">
 					<span class="hs-eyebrow"><?php esc_html_e( 'Also stocked at', 'hide-and-soul' ); ?></span>
-					<h2><?php esc_html_e( 'Approved wholesalers in the Black Hills', 'hide-and-soul' ); ?></h2>
+					<h2><?php esc_html_e( 'Stores in the area that carry our work', 'hide-and-soul' ); ?></h2>
 					<p><?php esc_html_e( 'We have sold wholesale for years. If you have been to a rodeo or a motorcycle event and seen something like our hip bags, there is a fair chance it was ours.', 'hide-and-soul' ); ?></p>
 				</div>
 

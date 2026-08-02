@@ -20,9 +20,12 @@ function hs_info_defaults() {
 		'legal_name'   => 'Hide and Soul Leatherworks',
 		// The homepage says "est. 1983" — not 1984, as directory listings claim.
 		'tagline'      => 'Handcrafted leather since 1983',
+		// The public number. Formerly a landline, now a Google Voice line that
+		// rings Jennifer's mobile — so it reaches her at either shop, in either
+		// season. Keep this one on directories and print; it is the number the
+		// business is known by.
 		'phone'        => '(605) 578-9746',
-		// The mobile. The custom-orders page routes callers here rather than to
-		// the shop, and it is the only number given for the Cave Creek outpost.
+		// Jennifer's mobile direct. The custom-orders page sends callers here.
 		'custom_phone' => '(406) 788-5352',
 		// Confirmed from the Wix site's contact settings.
 		'email'        => 'roadkillleather@gmail.com',
@@ -83,15 +86,10 @@ function hs_phone_href( $key = 'phone' ) {
  *   string — a custom label for a day that isn't a normal open window
  *   null   — closed
  *
- * NOTE: these are the hours the owner gave directly. The Wix site published two
- * other versions of them, on two different pages:
- *
- *   owner          Tue-Sat 9-5,  Sun 10-4, Mon by arrangement   <- used here
- *   homepage       Wed-Sat 10-5, Sun 10-4, closed Mon
- *   locations page Tue-Sat 9-6,  Sun 10-4
- *
- * Three answers to "when are you open". Settle it before launch — see
- * docs/CONTENT-ISSUES.md.
+ * These are confirmed correct by the owner. The Wix site carried two other
+ * versions — homepage "Wed-Sat 10-5", locations page "Tue-Sat 9-6" — both wrong,
+ * left behind by other people editing the site over the years. Don't reinstate
+ * either from the old pages.
  *
  * Only array values reach the structured data. Monday is deliberately a label
  * rather than a window: "by appointment" is not an opening time, and telling
@@ -131,9 +129,9 @@ function hs_format_time( $time ) {
 }
 
 /**
- * Approved wholesalers who stock Hide and Soul goods locally.
+ * Stores in the area that carry some of our products.
  *
- * From the Locations page. These are other people's shops — keep the details
+ * Confirmed by the owner. These are other people's shops — keep the details
  * accurate or drop the entry rather than letting it go stale.
  *
  * @return array<int, array<string, string>>
@@ -252,10 +250,11 @@ function hs_locations() {
 			'city'    => 'Cave Creek',
 			'region'  => 'AZ',
 			'postal'  => '85331',
-			// The site lists only the cell for Cave Creek — the shop line is
-			// a Black Hills number and isn't answered down there.
-			'phone'   => hs_info( 'custom_phone' ),
-			'cell'    => '',
+			// The Wix page listed only the mobile here, presumably from when the
+			// 605 was a landline tied to the Deadwood shop. It's a Google Voice
+			// number now and rings through in Arizona too, so both are shown.
+			'phone'   => hs_info( 'phone' ),
+			'cell'    => hs_info( 'custom_phone' ),
 			'season'  => 'December – March',
 			'note'    => 'We set up in Frontier Town for the winter season. Same leather, same repairs, same hours — just warmer.',
 			'map'     => 'https://maps.google.com/maps?q=6245+E+Cave+Creek+Rd+Cave+Creek+AZ+85331&output=embed',
