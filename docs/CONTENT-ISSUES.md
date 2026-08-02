@@ -123,11 +123,41 @@ The men's page lists **Mahogany** for the Deerskin Vest. The store's colour
 options for that product are Black, Chocolate, Tobacco, Saddle and Smoke —
 no Mahogany.
 
-## 6. Hours
+## 6. Hours — three different answers
 
-The owner gives **Tue–Sat 9–5, Sun 10–4, Mon by arrangement**. The Wix homepage
-advertises **Wed–Sat 10–5, Sun 10–4, closed Mon**. The theme uses the owner's
-version.
+| Source | Tue | Wed–Sat | Sun | Mon |
+|---|---|---|---|---|
+| **Owner** *(used by the theme)* | 9–5 | 9–5 | 10–4 | by arrangement |
+| Homepage | *not listed* | 10–5 | 10–4 | closed |
+| Locations page | 9–6 | 9–6 | 10–4 | *not listed* |
+
+Every source agrees on Sunday and nothing else. Closing time is 5pm or 6pm
+depending on the page; opening is 9am or 10am; Tuesday is either a trading day
+or absent. Whichever is wrong is turning people away, or keeping the shop open
+for customers who never come.
+
+## 7. Wix Stores is DISABLED
+
+Attempting to write a price to the live store returns:
+
+```
+401 — TPA 1380b703-ce81-ff05-f115-39571d94dfcd is in invalid state DISABLED
+```
+
+That app ID is Wix Stores. The catalogue data is still readable — which is how
+all 33 products were pulled — but the app itself is switched off, so nothing can
+be written to it and the storefront may not be functioning for customers.
+
+This also explains why Wix Stores never appeared in the site's installed-app
+list. It has no bearing on the migration: the product data is already extracted
+and committed.
+
+## 8. Smaller things on the Locations page
+
+- Email is typed as `roadkillleather@gmail. com` — **note the space** — in the
+  Cave Creek block. A visitor copying it gets a bad address.
+- Cave Creek gives no street address at all, just "At Frontier Town". The
+  theme now carries the real one: 6245 E Cave Creek Rd, Cave Creek, AZ 85331.
 
 ---
 

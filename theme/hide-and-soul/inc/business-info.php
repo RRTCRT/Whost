@@ -21,8 +21,8 @@ function hs_info_defaults() {
 		// The homepage says "est. 1983" — not 1984, as directory listings claim.
 		'tagline'      => 'Handcrafted leather since 1983',
 		'phone'        => '(605) 578-9746',
-		// The custom-orders page routes callers straight to Jenn on a separate
-		// line rather than the shop number.
+		// The mobile. The custom-orders page routes callers here rather than to
+		// the shop, and it is the only number given for the Cave Creek outpost.
 		'custom_phone' => '(406) 788-5352',
 		// Confirmed from the Wix site's contact settings.
 		'email'        => 'roadkillleather@gmail.com',
@@ -83,11 +83,15 @@ function hs_phone_href( $key = 'phone' ) {
  *   string — a custom label for a day that isn't a normal open window
  *   null   — closed
  *
- * NOTE: these are the hours the owner gave directly. The old Wix homepage
- * advertised something different — "Wednesday - Saturday: 10 am - 5 pm,
- * Sunday 10 am - 4 pm, Closed Monday" — so the Wix site was either stale or
- * these are new. Worth settling before launch; whichever is wrong is turning
- * people away at the door.
+ * NOTE: these are the hours the owner gave directly. The Wix site published two
+ * other versions of them, on two different pages:
+ *
+ *   owner          Tue-Sat 9-5,  Sun 10-4, Mon by arrangement   <- used here
+ *   homepage       Wed-Sat 10-5, Sun 10-4, closed Mon
+ *   locations page Tue-Sat 9-6,  Sun 10-4
+ *
+ * Three answers to "when are you open". Settle it before launch — see
+ * docs/CONTENT-ISSUES.md.
  *
  * Only array values reach the structured data. Monday is deliberately a label
  * rather than a window: "by appointment" is not an opening time, and telling
@@ -124,6 +128,50 @@ function hs_format_time( $time ) {
 	$stamp = strtotime( $time );
 
 	return $stamp ? date_i18n( 'g:i a', $stamp ) : $time;
+}
+
+/**
+ * Approved wholesalers who stock Hide and Soul goods locally.
+ *
+ * From the Locations page. These are other people's shops — keep the details
+ * accurate or drop the entry rather than letting it go stale.
+ *
+ * @return array<int, array<string, string>>
+ */
+function hs_wholesalers() {
+	$stockists = array(
+		array(
+			'name'   => "Trevino's Leather",
+			'street' => '21412 US HWY 385',
+			'city'   => 'Deadwood',
+			'region' => 'SD',
+			'postal' => '57732',
+			'phone'  => '(605) 578-1271',
+		),
+		array(
+			'name'   => "Scott Jacob's Gallery",
+			'street' => '670 Main St',
+			'city'   => 'Deadwood',
+			'region' => 'SD',
+			'postal' => '57732',
+			'phone'  => '(605) 559-1876',
+		),
+		array(
+			'name'   => 'Claw, Antler & Hide',
+			'street' => '735 Mt Rushmore Rd',
+			'city'   => 'Custer',
+			'region' => 'SD',
+			'postal' => '57730',
+			'phone'  => '(605) 673-4345',
+		),
+	);
+
+	/**
+	 * Filter the stockist list.
+	 *
+	 * @param array $stockists Wholesaler rows.
+	 */
+	return apply_filters( 'hs_wholesalers', $stockists );
 }
 
 /**
@@ -192,6 +240,7 @@ function hs_locations() {
 			'region'  => hs_info( 'region' ),
 			'postal'  => hs_info( 'postal' ),
 			'phone'   => hs_info( 'phone' ),
+			'cell'    => hs_info( 'custom_phone' ),
 			'season'  => 'April – November',
 			'note'    => 'On US Highway 385, eight miles south of Deadwood — just south of Nemo Road, on the left. Full workshop on site: repairs, fittings and custom orders.',
 			'map'     => 'https://maps.google.com/maps?q=21576+US+HWY+385+Deadwood+SD+57732&output=embed',
@@ -203,7 +252,10 @@ function hs_locations() {
 			'city'    => 'Cave Creek',
 			'region'  => 'AZ',
 			'postal'  => '85331',
-			'phone'   => hs_info( 'phone' ),
+			// The site lists only the cell for Cave Creek — the shop line is
+			// a Black Hills number and isn't answered down there.
+			'phone'   => hs_info( 'custom_phone' ),
+			'cell'    => '',
 			'season'  => 'December – March',
 			'note'    => 'We set up in Frontier Town for the winter season. Same leather, same repairs, same hours — just warmer.',
 			'map'     => 'https://maps.google.com/maps?q=6245+E+Cave+Creek+Rd+Cave+Creek+AZ+85331&output=embed',

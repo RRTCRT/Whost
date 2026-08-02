@@ -69,8 +69,20 @@ while ( have_posts() ) :
 							</li>
 
 							<li>
-								<strong><?php esc_html_e( 'Phone', 'hide-and-soul' ); ?></strong>
-								<span><a href="<?php echo esc_url( hs_phone_href() ); ?>"><?php echo esc_html( $loc['phone'] ); ?></a></span>
+								<strong><?php echo esc_html( empty( $loc['cell'] ) ? __( 'Cell', 'hide-and-soul' ) : __( 'Main', 'hide-and-soul' ) ); ?></strong>
+								<span><a href="tel:+<?php echo esc_attr( preg_replace( '/\D+/', '', $loc['phone'] ) ); ?>"><?php echo esc_html( $loc['phone'] ); ?></a></span>
+							</li>
+
+							<?php if ( ! empty( $loc['cell'] ) ) : ?>
+								<li>
+									<strong><?php esc_html_e( 'Cell', 'hide-and-soul' ); ?></strong>
+									<span><a href="tel:+<?php echo esc_attr( preg_replace( '/\D+/', '', $loc['cell'] ) ); ?>"><?php echo esc_html( $loc['cell'] ); ?></a></span>
+								</li>
+							<?php endif; ?>
+
+							<li>
+								<strong><?php esc_html_e( 'Email', 'hide-and-soul' ); ?></strong>
+								<span><a href="mailto:<?php echo esc_attr( hs_info( 'email' ) ); ?>"><?php echo esc_html( hs_info( 'email' ) ); ?></a></span>
 							</li>
 						</ul>
 
@@ -88,6 +100,28 @@ while ( have_posts() ) :
 						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
+			</div>
+
+			<?php /* Approved wholesalers — other shops that stock our work. */ ?>
+			<div style="margin-top:clamp(3rem,7vw,4.5rem);">
+				<div class="hs-section__head">
+					<span class="hs-eyebrow"><?php esc_html_e( 'Also stocked at', 'hide-and-soul' ); ?></span>
+					<h2><?php esc_html_e( 'Approved wholesalers in the Black Hills', 'hide-and-soul' ); ?></h2>
+					<p><?php esc_html_e( 'We have sold wholesale for years. If you have been to a rodeo or a motorcycle event and seen something like our hip bags, there is a fair chance it was ours.', 'hide-and-soul' ); ?></p>
+				</div>
+
+				<div class="hs-grid hs-grid--3">
+					<?php foreach ( hs_wholesalers() as $hs_shop ) : ?>
+						<div class="hs-material" data-hs-reveal>
+							<h3 style="font-size:1.1rem;"><?php echo esc_html( $hs_shop['name'] ); ?></h3>
+							<p>
+								<?php echo esc_html( $hs_shop['street'] ); ?><br>
+								<?php echo esc_html( $hs_shop['city'] . ', ' . $hs_shop['region'] . ' ' . $hs_shop['postal'] ); ?><br>
+								<a href="tel:+1<?php echo esc_attr( preg_replace( '/\D+/', '', $hs_shop['phone'] ) ); ?>"><?php echo esc_html( $hs_shop['phone'] ); ?></a>
+							</p>
+						</div>
+					<?php endforeach; ?>
+				</div>
 			</div>
 
 			<div style="max-width:24rem;margin:3rem auto 0;">
