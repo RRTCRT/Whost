@@ -42,6 +42,8 @@ function hs_legacy_redirect_map() {
 		'bh-guide'           => '/black-hills-guide/',
 		'crp'                => '/referrals/',
 		'media-links'        => '/videos/',
+		// Wix served this misspelled; the new slug is correct.
+		'testamonials'       => '/testimonials/',
 
 		// Wix system paths that have no WordPress equivalent.
 		'account/my-account' => '/my-account/',

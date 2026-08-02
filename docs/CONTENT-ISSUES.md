@@ -181,7 +181,41 @@ engines too.
   the most persuasive thing on the page; a repairs page without before/after
   shots is much weaker.
 
-## 11. Who to trust when sources disagree
+## 11. ⚠ Testimonials will be LOST unless copied off Wix by hand
+
+The testimonials page used two Wix widgets — a rotating quote slider and a
+"Share your experience" comments box. **Both load their content from Wix's
+servers at runtime.** The saved HTML contains one slider quote and none of the
+comments, and the Comments API returned nothing under any of the ten app IDs
+found in the page.
+
+The screenshot shows the widget saying **"3 comments"**, with reviews dated up
+to six years old, and the slider has **five dots** — so five rotating quotes.
+At least eight reviews exist. Three are recovered so far.
+
+**Before the Wix subscription is cancelled**, open
+`https://www.hideandsoul.com/testamonials`, click through all five slider
+quotes and "See more comments", and copy every review with its author name.
+Then add them to `hs_testimonials()` in
+`theme/hide-and-soul/inc/testimonials.php`.
+
+This is the single most irreplaceable content on the site. A customer who wrote
+a review six years ago will not write it again.
+
+Two of the three recovered are marked `'verify' => true` because they were
+transcribed from a screenshot rather than page source — check the wording and
+spelling of the names against the live page.
+
+## 12. The testimonials URL is misspelled
+
+The live page is at **`/testamonials`** — "testAmonials" — while the navigation
+label reads "TESTIMONIALS". It appears 55 times across the site, since it is in
+the global nav.
+
+The new site uses the correct `/testimonials/`, with a 301 from the old
+spelling so nothing indexed is lost.
+
+## 13. Who to trust when sources disagree
 
 Several people have edited the Wix site over the years and it drifted. The
 owner has taken it over for this migration. Ranking, highest first:

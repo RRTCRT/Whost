@@ -1429,3 +1429,39 @@ input[type="submit"] { font: inherit; }
 	gap: clamp(0.75rem, 2vw, 1.25rem);
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
 }
+
+/* ==========================================================================
+   19. Testimonials
+   ========================================================================== */
+
+.hs-review {
+	margin: 0;
+	padding: 1.75rem;
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
+	border-left: 3px solid var(--hs-saddle);
+	border-radius: var(--hs-radius);
+}
+
+.hs-review__stars {
+	margin-bottom: 0.75rem;
+	color: var(--hs-buckskin);
+	font-size: 1.05rem;
+	letter-spacing: 0.15em;
+}
+
+.hs-review blockquote {
+	margin: 0 0 1rem;
+	font-family: var(--hs-font-display);
+	font-size: 1.05rem;
+	line-height: 1.55;
+	color: var(--hs-text);
+}
+
+.hs-review figcaption {
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--hs-muted-text);
+}
