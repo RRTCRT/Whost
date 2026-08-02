@@ -1465,3 +1465,51 @@ input[type="submit"] { font: inherit; }
 	text-transform: uppercase;
 	color: var(--hs-muted-text);
 }
+
+/* ==========================================================================
+   20. Numbered care steps
+   ========================================================================== */
+
+.hs-steps {
+	counter-reset: hs-step;
+	list-style: none;
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.hs-steps li {
+	position: relative;
+	margin-bottom: 0.75rem;
+	padding: 1.1rem 1.35rem 1.1rem 3.75rem;
+	background: var(--hs-surface);
+	border: 1px solid var(--hs-border);
+	border-radius: var(--hs-radius);
+}
+
+.hs-steps li::before {
+	counter-increment: hs-step;
+	content: counter(hs-step);
+	position: absolute;
+	top: 1rem;
+	left: 1.1rem;
+	display: grid;
+	place-items: center;
+	width: 1.9rem;
+	height: 1.9rem;
+	background: var(--hs-saddle);
+	border-radius: 50%;
+	color: var(--hs-bone);
+	font-family: var(--hs-font-display);
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.hs-steps__warn {
+	display: block;
+	margin-top: 0.6rem;
+	padding-left: 0.85rem;
+	border-left: 3px solid var(--hs-buckskin);
+	color: var(--hs-buckskin);
+	font-size: 0.95rem;
+}

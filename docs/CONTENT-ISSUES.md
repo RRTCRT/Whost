@@ -215,7 +215,17 @@ the global nav.
 The new site uses the correct `/testimonials/`, with a 301 from the old
 spelling so nothing indexed is lost.
 
-## 13. Who to trust when sources disagree
+## 13. Cleaning & Care — typo, and three missing videos
+
+- **"abraid"** should be **"abrade"** ("excessive scrubbing will abrade the
+  grain"). Corrected in the theme copy.
+- "Lexol" is capitalised inconsistently within the same paragraph. Normalised.
+- The page has three video slots — **Handwashing**, **Machine washing**,
+  **Aftercare: Skidmore's** — all rendered by the Wix Video app and empty in the
+  saved page. The theme embeds the whole How-To playlist instead, which contains
+  all three, rather than guessing at individual video IDs.
+
+## 14. Who to trust when sources disagree
 
 Several people have edited the Wix site over the years and it drifted. The
 owner has taken it over for this migration. Ranking, highest first:
