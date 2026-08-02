@@ -47,25 +47,35 @@ On the accessories page:
 Also present on both the men's and accessories pages: a stray **`487059`**
 sitting in the body copy with no context.
 
-## 3. Prices: the store is stale, confirmed three ways
+## 3. Prices: the store was stale, confirmed three ways — ✅ FIXED
 
 The same garment is priced on the custom-orders page, on its shop page, and on
 the WooCommerce product. Where the two pages agree against the store, the store
 is the outlier.
 
-| Garment | Custom orders | Shop page | Store | Verdict |
-|---|--:|--:|--:|---|
-| Maverick Shirt | $899 | $899 *(men's)* | **$999** | store stale → **$899** |
-| Men's Jacket | $1,299 | $1,299 *(men's)* | **$1,195** | store stale → **$1,299** |
-| Ladies Jacket | $1,199 | $1,199 *(women's)* | **$1,099** | store stale → **$1,199** |
-| Boone Shirt | $999 | from $899 | $999 | ✅ $999 |
-| Men's vests | $525 / $575 / $649 | same | same | ✅ |
-| Chaps / half chaps | $895 / $399 | same | same | ✅ |
-| Ladies vests | $399 | $399 | $399 | ✅ |
+| Garment | Custom orders | Shop page | Store *(was)* | Corrected to |
+|---|--:|--:|--:|--:|
+| Maverick Shirt | $899 | $899 *(men's)* | ~~$999~~ | **$899** |
+| Men's Jacket | $1,299 | $1,299 *(men's)* | ~~$1,195~~ | **$1,299** |
+| Ladies Jacket | $1,199 | $1,199 *(women's)* | ~~$1,099~~ | **$1,199** |
+| Boone Shirt | $999 | from $899 | $999 | unchanged ✅ |
+| Men's vests | $525 / $575 / $649 | same | same | unchanged ✅ |
+| Chaps / half chaps | $895 / $399 | same | same | unchanged ✅ |
+| Ladies vests | $399 | $399 | $399 | unchanged ✅ |
 
-All three conflicts now resolve the same way: **the shop product is out of
-date.** Fix them in WooCommerce after import, or in `data/wix-products-*.json`
-before it.
+All three resolved the same way — the shop product was the stale one — and all
+three are now corrected in `data/wix-products-*.json`, so the WooCommerce import
+carries the right price. The store was undercharging by $100–104 on each.
+
+> **This changed the migration data, not the live Wix store.** The Wix shop
+> still shows the old prices until it's retired or edited there.
+
+### Still open: Adjustable Half Chaps quotes three prices
+
+Listed at **$399**, while its own description says *"Our basic pair starts at
+$295"* and *"an upgraded CUSTOM pair that starts at $550"*. Left alone because
+it isn't clear which is current — the $295 may predate a price rise, or describe
+a plainer version. Fix the description text in wp-admin once decided.
 
 ### Possibly not a conflict
 
