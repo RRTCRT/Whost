@@ -45,6 +45,11 @@ function hs_local_business_schema() {
 		'email'       => hs_info( 'email' ),
 		'priceRange'  => hs_info( 'price_range' ),
 		'description' => get_bloginfo( 'description' ),
+		'foundingDate' => '1983',
+		'founder'     => array(
+			array( '@type' => 'Person', 'name' => 'Rick Todd' ),
+			array( '@type' => 'Person', 'name' => 'Jennifer Todd' ),
+		),
 		'address'     => array(
 			'@type'           => 'PostalAddress',
 			'streetAddress'   => hs_info( 'street' ),

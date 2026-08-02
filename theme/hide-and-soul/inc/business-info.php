@@ -18,6 +18,9 @@ defined( 'ABSPATH' ) || exit;
 function hs_info_defaults() {
 	return array(
 		'legal_name'   => 'Hide and Soul Leatherworks',
+		// Rick and Jennifer Todd. Rick heads the hard leather side — holsters,
+		// belts, sheaths; Jennifer takes the custom orders.
+		'owners'       => 'Rick & Jennifer Todd',
 		// The homepage says "est. 1983" — not 1984, as directory listings claim.
 		'tagline'      => 'Handcrafted leather since 1983',
 		// The public number. Formerly a landline, now a Google Voice line that

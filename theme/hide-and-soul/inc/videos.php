@@ -30,9 +30,12 @@ function hs_video_channel() {
 /**
  * Playlists to feature, in order.
  *
- * TODO: the two playlist IDs were recovered from the saved page but not which
- * is which — that needs one look at the channel. If the titles below are the
- * wrong way round, swap the two 'id' values.
+ * Ordered as the old page ordered them: the Goldens first, How-To second.
+ *
+ * TODO: both playlist IDs came off the saved page, but which ID belongs to
+ * which playlist could not be confirmed — the IDs sit in a JSON blob far from
+ * the captions. One look at the channel settles it; if the two are the wrong
+ * way round, swap the 'id' values below.
  *
  * @return array<int, array<string, string>>
  */
@@ -40,13 +43,13 @@ function hs_video_playlists() {
 	$playlists = array(
 		array(
 			'id'    => 'PL_kwUr2yRrof5yw9vvS-ZH0dQpGPC-I34',
-			'title' => __( 'How-To Playlist', 'hide-and-soul' ),
-			'intro' => __( 'Washing leather by hand, folding chaps for the bike, cleaning mould off a jacket, upgrading half chaps with conchos, and how to measure yourself for a shirt, jacket or chaps.', 'hide-and-soul' ),
+			'title' => __( 'The Motorcycle Riding Goldens', 'hide-and-soul' ),
+			'intro' => __( 'Caleb, the original motorcycle riding golden retriever, and the ones who came after him — Sturgis, Spearfish Canyon, Arizona and home.', 'hide-and-soul' ),
 		),
 		array(
 			'id'    => 'PL_kwUr2yRrofr_WEIwhCN0B3b4UctnY5x',
-			'title' => __( 'The Motorcycle Riding Goldens', 'hide-and-soul' ),
-			'intro' => __( 'Caleb, the original motorcycle riding golden retriever, and the ones who came after him — Sturgis, Spearfish Canyon, Arizona and home.', 'hide-and-soul' ),
+			'title' => __( 'How-To Playlist', 'hide-and-soul' ),
+			'intro' => __( 'Washing leather by hand, folding chaps for the bike, cleaning mould off a jacket, upgrading half chaps with conchos, and how to measure yourself for a shirt, jacket or chaps.', 'hide-and-soul' ),
 		),
 	);
 

@@ -164,7 +164,13 @@ and committed.
   that rings Jennifer's mobile, so it reaches her in Arizona too — both numbers
   are shown for both shops.
 
-## 9. Who to trust when sources disagree
+## 9. About page typo
+
+The heading reads **"0VER 40 YEARS OF WORK!"** — that's a zero, not the letter
+O. Easy to miss on screen, and it's a heading, so it carries weight with search
+engines too.
+
+## 10. Who to trust when sources disagree
 
 Several people have edited the Wix site over the years and it drifted. The
 owner has taken it over for this migration. Ranking, highest first:
