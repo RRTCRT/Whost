@@ -2,106 +2,147 @@
 
 Staging: `https://www.mediumseagreen-gerbil-453930.hostingersite.com/`
 
-Three ways to get the theme onto the server. Pick one — **A** is the fastest if
-you're doing this once, **C** is the one to use if you'll be editing often.
+**You do not need SSH.** Everything below happens in wp-admin, in a browser.
+Skip SSH entirely unless you later want it for something else.
 
 ---
 
-## A. Zip upload through wp-admin (easiest)
+## The short version
+
+1. Download the two zips *(next section)*
+2. **Appearance ➜ Themes ➜ Add New ➜ Upload Theme** ➜ `hide-and-soul.zip` ➜ Install ➜ Activate
+3. **Plugins ➜ Add New ➜ Upload Plugin** ➜ `hide-and-soul-redirects.zip` ➜ Install ➜ Activate
+4. **Settings ➜ Permalinks** ➜ *Post name* ➜ Save
+
+Under two minutes. Repeat steps 2 and 3 whenever there's an update.
+
+---
+
+## Getting the zips
+
+### Easiest — download from GitHub
+
+Every push builds them automatically.
+
+1. Go to the repo's **Actions** tab
+2. Click the newest **"Build installable zips"** run
+3. Scroll to **Artifacts** and download **hide-and-soul-wordpress**
+4. Unzip it — inside are `hide-and-soul.zip` and `hide-and-soul-redirects.zip`
+
+> GitHub wraps artifacts in an outer zip. Upload the **inner** zips to
+> WordPress, not the wrapper.
+
+### Or build them yourself
+
+Needs Python, which macOS and Linux already have and Windows offers in the
+Microsoft Store:
 
 ```bash
-cd theme
-zip -r hide-and-soul.zip hide-and-soul \
-  -x '*.DS_Store' -x '__MACOSX/*'
+python3 tools/build_zips.py
 ```
 
-Then: **wp-admin ➜ Appearance ➜ Themes ➜ Add New ➜ Upload Theme ➜ Install ➜ Activate.**
+Writes both files to `dist/`. It also checks the archive is shaped the way
+WordPress expects before it finishes.
 
-> The zip must contain the folder `hide-and-soul/` at its root, with
-> `style.css` directly inside it. If WordPress says "the theme is missing the
-> stylesheet", you zipped the files instead of the folder.
+---
 
-Repeat for the redirects plugin — but it goes in a different place, see below.
+## "But a one-time upload won't work — I'll need to change things"
 
-## B. hPanel File Manager
+It isn't one-time. **WordPress lets you upload the same theme again.**
+
+Since WordPress 5.5, uploading a theme or plugin that's already installed shows
+a comparison of the current and uploaded versions, with a **"Replace current
+with uploaded"** button. Click it and the theme updates in place. Your settings,
+menus, pages and Customizer options are all untouched — they live in the
+database, not the theme.
+
+So the update loop is:
+
+| | |
+|---|---|
+| I push a change | GitHub builds a fresh zip automatically |
+| You download it | Actions tab ➜ newest run ➜ Artifacts |
+| You upload it | Appearance ➜ Themes ➜ Add New ➜ Upload ➜ **Replace current with uploaded** |
+
+About a minute, no terminal.
+
+### For small CSS tweaks, skip the zip
+
+**Appearance ➜ Customize ➜ Additional CSS** takes CSS straight into the
+database. Good for a colour or a spacing nudge you want to try immediately.
+Anything you want to keep should come back to the repo so it isn't lost on the
+next theme upload.
+
+---
+
+## Option B — hPanel File Manager
+
+Worth knowing, though you won't need it for normal updates.
 
 1. hPanel ➜ **Files ➜ File Manager**
-2. Navigate to `public_html/wp-content/themes/`
+2. Go to `public_html/wp-content/themes/`
 3. Upload `hide-and-soul.zip`, right-click ➜ **Extract**
-4. Navigate to `public_html/wp-content/` and create a folder called
-   **`mu-plugins`** if it doesn't exist
-5. Upload `mu-plugins/hide-and-soul-redirects.php` into it
 
-`mu-plugins` = *must-use plugins*. Files there load automatically and can't be
-deactivated — which is exactly what you want for redirects, because a
-deactivated redirect plugin is a site full of 404s.
+The File Manager is the only way to reach `wp-content/mu-plugins/`, which is
+where the redirects file ideally lives — must-use plugins load automatically and
+**cannot be deactivated**, which is exactly what you want for redirects.
 
-## C. SSH + git (best for ongoing work)
+The plugin zip exists so you don't need that. The only difference is that a
+normal plugin *can* be switched off, and if it is, every old Wix URL starts
+returning 404. The plugin header says so at the top of the file.
 
-Available on Hostinger Business plans and above. hPanel ➜ **Advanced ➜ SSH Access**.
-
-```bash
-ssh -p 65002 uXXXXXXXX@YOUR.SERVER.IP
-
-cd ~/domains/hideandsoul.com/public_html/wp-content
-
-# First time
-git clone https://github.com/RRTCRT/Whost.git ~/whost-src
-ln -s ~/whost-src/theme/hide-and-soul themes/hide-and-soul
-mkdir -p mu-plugins
-ln -s ~/whost-src/mu-plugins/hide-and-soul-redirects.php mu-plugins/
-
-# Every update after that
-cd ~/whost-src && git pull
-```
-
-Symlinks mean `git pull` deploys. If your Hostinger plan disallows symlinks,
-clone directly into `themes/` instead:
-
-```bash
-cd ~/domains/hideandsoul.com/public_html/wp-content/themes
-git clone --depth 1 https://github.com/RRTCRT/Whost.git tmp-whost
-mv tmp-whost/theme/hide-and-soul ./hide-and-soul
-rm -rf tmp-whost
-```
+If you ever do get File Manager access working comfortably, move
+`hide-and-soul-redirects.php` into `wp-content/mu-plugins/` (create the folder
+if it isn't there) and deactivate the plugin version. Same behaviour, one less
+thing to break.
 
 ---
 
 ## Post-install checklist
 
-- [ ] **Appearance ➜ Customize ➜ Hide and Soul ➜ Business Info** — verify phone,
-      address, hours. These drive the footer *and* the structured data Google reads.
-- [ ] **Appearance ➜ Customize ➜ Homepage Hero** — set a background image.
-- [ ] **Settings ➜ Permalinks** — set to **Post name**, then save once more after
-      installing WooCommerce (this flushes the `/product-page/` rewrite rules).
+- [ ] **Settings ➜ Permalinks ➜ Post name**, then Save. Do this again after
+      installing WooCommerce — it flushes the `/product-page/` rules.
+- [ ] **Appearance ➜ Customize ➜ Hide and Soul ➜ Business Info** — check phone,
+      address and hours. These feed the footer *and* the data Google reads.
+- [ ] **Customize ➜ Homepage Hero** — set a background photo.
 - [ ] **Settings ➜ Reading** — static homepage.
-- [ ] **Appearance ➜ Menus** — create Primary and Footer menus.
-- [ ] Upload a logo at **Customize ➜ Site Identity** (or the theme renders the
-      site name as a wordmark, which is a fine fallback).
+- [ ] **Appearance ➜ Menus** — Primary, Footer and Legal menus.
+- [ ] Create each page and set its **Page Attributes ➜ Template** — the README
+      lists which template goes with which page.
 
-## Hostinger-specific gotchas
+---
 
-**LiteSpeed cache.** Hostinger ships LiteSpeed. After any theme change, purge:
-hPanel ➜ **Performance ➜ Cache Manager ➜ Purge All**. If CSS edits appear not
-to work, this is why, nine times out of ten.
+## Hostinger gotchas
 
-**PHP version.** hPanel ➜ Advanced ➜ PHP Configuration ➜ **8.2** or newer. The
-theme declares `Requires PHP: 8.0` and uses typed properties.
+**LiteSpeed cache.** Hostinger ships LiteSpeed. After any theme upload, purge:
+hPanel ➜ **Performance ➜ Cache Manager ➜ Purge All**. If a change appears not to
+have worked, this is why nine times out of ten. Hard-refresh your browser too
+(Ctrl+Shift+R, or Cmd+Shift+R on a Mac).
 
-**Object cache.** If you enable Hostinger's Redis object cache, flush it after
-changing Customizer settings — theme mods are cached.
+**PHP version.** hPanel ➜ Advanced ➜ PHP Configuration ➜ **8.2** or newer.
 
-**Email.** Hostinger's `mail()` is unreliable for transactional mail. Install
-**WP Mail SMTP** and point it at a real mailbox before you turn on checkout,
-or order confirmations will silently vanish.
+**Upload size limit.** The theme zip is about 60 KB, far below any limit, so
+uploads should never fail on size. If one does, the file is corrupt — rebuild it.
 
-**File permissions.** Directories `755`, files `644`. If the File Manager
-extraction leaves things at `777`, WordPress may refuse to load the theme.
+**Email.** Hostinger's PHP mail is unreliable. Install **WP Mail SMTP** before
+turning on any form, or enquiries will vanish silently.
 
 ---
 
 ## Rolling back
 
-Hostinger keeps automatic backups: hPanel ➜ **Files ➜ Backups ➜ Restore**.
-Take a manual one before the DNS cutover regardless — the automatic schedule
-may not have run recently enough to matter.
+The last few zips stay in GitHub Actions for 90 days, and tagged releases keep
+theirs permanently — so rolling back is just uploading an older zip and choosing
+"Replace current with uploaded".
+
+Take a Hostinger backup before the DNS cutover regardless: hPanel ➜ **Files ➜
+Backups**.
+
+---
+
+## If you do want SSH later
+
+Nothing above needs it, so treat it as optional. Two things that catch people
+out: Hostinger's SSH port is **65002**, not 22, and SSH access is only available
+on Business plans and above — on lower plans the menu appears but never
+connects, which is a common way to lose an afternoon.

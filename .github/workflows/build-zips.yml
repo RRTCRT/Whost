@@ -1,0 +1,72 @@
+name: Build installable zips
+
+# Builds the theme and redirects zips on every push, so there is always a
+# current download in GitHub. No SSH, no local Python, no build step on your
+# machine — go to the Actions tab, open the newest run, download the artifact.
+#
+# Tagging a release (v1.0.1, v1.1.0, …) also attaches the zips to that release,
+# which gives a permanent link and a record of what was deployed when.
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+    paths:
+      - 'theme/**'
+      - 'mu-plugins/**'
+      - 'tools/build_zips.py'
+      - '.github/workflows/build-zips.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Lint every PHP file
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            php -l "$f" > /dev/null || { echo "SYNTAX ERROR in $f"; fail=1; }
+          done < <(find theme mu-plugins -name '*.php')
+          exit $fail
+
+      - name: Check the stylesheet parses
+        run: |
+          python3 - <<'PY'
+          import sys
+          css = open('theme/hide-and-soul/style.css', encoding='utf-8').read()
+          if css.count('{') != css.count('}'):
+              sys.exit(f"unbalanced braces: {css.count('{')} open, {css.count('}')} close")
+          print(f"style.css ok — {css.count('{')} rules")
+          PY
+
+      - name: Check the JavaScript parses
+        run: node --check theme/hide-and-soul/assets/js/main.js
+
+      - name: Build the zips
+        run: python3 tools/build_zips.py
+
+      - name: Upload as a downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hide-and-soul-wordpress
+          path: dist/*.zip
+          retention-days: 90
+
+      - name: Attach to the release, when tagged
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true

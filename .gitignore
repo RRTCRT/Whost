@@ -5,6 +5,9 @@
 # Saved Wix pages and downloaded originals — large, and not source
 /wix-html/
 /media/
+
+# Built by tools/build_zips.py and by CI
+/dist/
 *.zip
 
 # WordPress runtime, should this ever sit inside an install

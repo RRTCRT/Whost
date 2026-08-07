@@ -19,6 +19,21 @@ build/                   generated: WordPress import file + media URL list
 3. **[docs/HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md)** — getting the code onto the server
 4. **[docs/URL-MAP.csv](docs/URL-MAP.csv)** — every old Wix URL and where it now goes
 
+## Installing it — no SSH needed
+
+Grab the two zips from the repo's **Actions** tab (newest run ➜ Artifacts), or
+build them yourself with `python3 tools/build_zips.py`. Then:
+
+| Zip | Where it goes |
+|---|---|
+| `hide-and-soul.zip` | Appearance ➜ Themes ➜ Add New ➜ **Upload Theme** |
+| `hide-and-soul-redirects.zip` | Plugins ➜ Add New ➜ **Upload Plugin** |
+
+**Updating later is the same two clicks.** Upload the newer zip and WordPress
+offers **"Replace current with uploaded"** — your pages, menus and settings live
+in the database and are not touched. Full detail in
+[HOSTINGER-DEPLOY.md](docs/HOSTINGER-DEPLOY.md).
+
 ## State of play
 
 All 15 Wix pages are extracted and every one has a template.
